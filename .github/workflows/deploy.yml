@@ -33,4 +33,4 @@ jobs:
                   rm: 'true'
                   port: '22'
                   source: 'dist/'
-                  target: '/home/alexey/build'
+                  target: '/var/www/'
