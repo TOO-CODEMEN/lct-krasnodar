@@ -42,4 +42,4 @@ jobs:
                   key: '${{ secrets.NGINX_SERVER_KEY }}'
                   port: '22'
                   script: |
-                      rm -rf /var/www/dist && mv build/dist /var/www/dist
+                      sudo rm -rf /var/www/dist && sudo mv build/dist /var/www/dist
