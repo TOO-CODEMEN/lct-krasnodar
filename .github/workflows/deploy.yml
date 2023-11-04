@@ -32,4 +32,4 @@ jobs:
                   key_path: 'id_rsa'
                   port: '22'
                   source: 'dist/'
-                  target: '/var/www/frontend/'
+                  target: '/home/alexey/build'
