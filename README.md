@@ -1,7 +1,7 @@
 # Сервис онбординга и адаптации сотрудников
 
 ## Ссылка на сервис
-TODO
+http://too-codemen.ru/
 
 ## Особенности
 TODO
@@ -35,4 +35,4 @@ git clone https://github.com/TOO-CODEMEN/lct-krasnodar.git
 TODO
 
 ## Шаблон дизайна
-[Шаблон](TODO)
+[Шаблон](https://www.figma.com/file/NOSUcXPVnOQQHA2IemAYy7/LCT2023?type=design&node-id=0:1&mode=design&t=LP7hbPE90wtktsa9-1)
