@@ -29,6 +29,6 @@ jobs:
               with:
                   host: ${{ secrets.NGINX_SERVER_HOST }}
                   username: ${{ secrets.NGINX_SERVER_USERNAME }}
-                  password: ${{ secrets.NGINX_SERVER_PASSWORD }}
+                  key: ${{ secrets.NGINX_SERVER_KEY }}
                   source: 'dist/'
                   target: '/var/www/frontend/'
