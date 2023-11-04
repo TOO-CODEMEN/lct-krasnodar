@@ -27,8 +27,8 @@ jobs:
             - name: Deploy to Nginx Server
               uses: appleboy/scp-action@master
               with:
-                  host: ${{ secrets.NGINX_SERVER_HOST }}
-                  username: ${{ secrets.NGINX_SERVER_USERNAME }}
-                  key: ${{ secrets.NGINX_SERVER_KEY }}
+                  host: '89.232.170.76'
+                  username: 'alexey'
+                  password: 'frontend'
                   source: 'dist/'
                   target: '/var/www/frontend/'
