@@ -29,7 +29,7 @@ jobs:
               with:
                   host: '89.232.170.76'
                   username: 'alexey'
-                  password: 'frontend'
+                  key: ${{ secrets.NGINX_SERVER_KEY }}
                   port: '22'
                   source: 'dist/'
                   target: '/var/www/frontend/'
