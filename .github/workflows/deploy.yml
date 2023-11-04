@@ -29,7 +29,8 @@ jobs:
               with:
                   host: '89.232.170.76'
                   username: 'alexey'
-                  key_path: 'id_rsa'
+                  key: '${{ secrets.NGINX_SERVER_KEY }}'
+                  rm: 'true'
                   port: '22'
                   source: 'dist/'
                   target: '/home/alexey/build'
