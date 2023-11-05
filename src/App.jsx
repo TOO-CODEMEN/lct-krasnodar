@@ -1,9 +1,12 @@
 import styles from './App.module.scss'
+import DocxToHtmlParser from './HtmlParser'
 
 function App() {
 	return (
 		<>
-			<div>Hello World!!!</div>
+			<div className={styles.html}>
+				<DocxToHtmlParser />
+			</div>
 		</>
 	)
 }
