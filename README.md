@@ -1,8 +1,38 @@
-# React + Vite
+# Сервис онбординга и адаптации сотрудников
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Ссылка на сервис
+http://too-codemen.ru/
 
-Currently, two official plugins are available:
+## Особенности
+TODO
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технологический стек
+- __Backend:__ Java, Spring
+- __Frontend:__ React, Redux Toolkit, SCSS
+- SberCloud
+
+## Установка и запуск
+
+### Запуск проекта локально
+1. Для запуска потребуется __Node.js__, [Ссылка на скачивание](https://nodejs.org/en)
+2. Зайти в терминал
+3. Склонировать репозиторий
+```shell 
+git clone https://github.com/TOO-CODEMEN/lct-krasnodar.git
+```
+4. Зайти в склонированную папку и в корневую папку frontend
+5. Написать в терминале
+```shell
+ npm install
+```
+6. Написать в терминале
+```shell
+ npm run dev
+```
+7. Проект запущен, смотрите документацию
+
+## Документация
+TODO
+
+## Шаблон дизайна
+[Шаблон](https://www.figma.com/file/NOSUcXPVnOQQHA2IemAYy7/LCT2023?type=design&node-id=0:1&mode=design&t=LP7hbPE90wtktsa9-1)

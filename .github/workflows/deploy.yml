@@ -1,0 +1,45 @@
+name: Deploy to Nginx Server
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '18'
+
+            - name: Install Dependencies
+              run: npm install
+
+            - name: Build Application
+              run: npm run build
+
+            - name: Deploy to Server
+              uses: appleboy/scp-action@master
+              with:
+                  host: '89.232.170.76'
+                  username: 'alexey'
+                  key: '${{ secrets.NGINX_SERVER_KEY }}'
+                  rm: 'true'
+                  port: '22'
+                  source: 'dist/'
+                  target: '/home/alexey/build'
+            - name: Move Folder
+              uses: appleboy/ssh-action@master
+              with:
+                  host: '89.232.170.76'
+                  username: 'alexey'
+                  key: '${{ secrets.NGINX_SERVER_KEY }}'
+                  port: '22'
+                  script: |
+                      sudo rm -rf /var/www/dist && sudo mv build/dist /var/www/dist && sudo systemctl restart nginx
