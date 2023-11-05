@@ -1,0 +1,14 @@
+.login {
+    min-width: 740px;
+    &__title {
+        color: #212529;
+        font-size: 34.875px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+}
