@@ -1,10 +1,11 @@
 import styles from './App.module.scss'
+import { Login } from './Pages/Login/Login'
 
 function App() {
 	return (
-		<>
-			<div>Hello World</div>
-		</>
+		<div className={styles.container}>
+			<Login />
+		</div>
 	)
 }
 
