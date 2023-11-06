@@ -25,7 +25,7 @@ export const Login = () => {
                     type='email'
                     defaultValue={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    style={{width: '100%', minWidth: 'transparent', marginBottom: 18, }}
+                    style={{width: '100%', marginBottom: 18, }}
                 />
                 <TextField
                     required
@@ -34,12 +34,12 @@ export const Login = () => {
                     type='password'
                     defaultValue={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    style={{width: '100%', minWidth: 'transparent', marginBottom: 18}}
+                    style={{width: '100%', marginBottom: 18}}
                 />
 
                 <Button
                     variant="contained"
-                    style={{width: '100%', borderRadius: 8, backgroundColor: '#E55C78' }}
+                    style={{width: '25%', borderRadius: 8, backgroundColor: '#E55C78' }}
                     onClick={(event) => onSubmitHandler(event)}
                 >Вход</Button>
             </div>
