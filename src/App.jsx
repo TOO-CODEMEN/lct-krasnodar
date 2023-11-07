@@ -4,10 +4,10 @@ import { Header } from './Components/Header/Header'
 import { isLoggedIn } from './session'
 import { JournalPage } from './Pages/Journal/JournalPage'
 import { PlanPage } from './Pages/Plan/PlanPage'
-import { MissionsPage } from './Pages/Missions/MissionsPage'
 import { LessonsPage } from './Pages/Lessons/LessonsPage'
 import { AnswersPage } from './Pages/Answers/AnswersPage'
 import { Footer } from './Components/Footer/Footer'
+
 function App() {
 
 	// if (!isLoggedIn()) {
@@ -22,7 +22,6 @@ function App() {
 					<Route path='/main' Component={Main} />
 					<Route path='/journal' Component={JournalPage} />
 					<Route path='/plan' Component={PlanPage} />
-					<Route path='/missions' Component={MissionsPage} />
 					<Route path='/lessons' Component={LessonsPage} />
 					<Route path='/answers' Component={AnswersPage} />
 					<Route path='*' element={<Navigate to='/main' />} />

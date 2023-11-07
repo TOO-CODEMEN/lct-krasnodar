@@ -1,0 +1,26 @@
+.news {
+    padding: 20px;
+    border: 1px solid #F1367D;
+    border-radius: 10px;
+    max-width: 350px;
+    cursor: pointer;
+
+    & img {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 10px
+    }
+
+    &__hashtags {
+        font-size: 12px;
+        color: blue;
+    }
+
+    &__title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    &__desc {
+        color: grey;
+    }
+}

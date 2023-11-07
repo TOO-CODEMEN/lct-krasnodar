@@ -6,7 +6,7 @@ const MaterialsItem = ({tag, title, text, image}) => {
             <div className={styles.Content}>
                 <div className={styles.Tag}>{tag}</div>
                 <h3 className={styles.Title}>{title}</h3>
-                <p className={styles.Text}>{text}</p>
+                {/* <p className={styles.Text}>{text}</p> */}
             </div>
             <img src={image} alt="Превью статьи" />
         </div>
