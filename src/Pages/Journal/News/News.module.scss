@@ -4,6 +4,7 @@
     border-radius: 10px;
     max-width: 350px;
     cursor: pointer;
+    transition: all .3s ease-in-out;
 
     & img {
         width: 100%;
@@ -21,6 +22,17 @@
         margin-bottom: 10px;
     }
     &__desc {
+        transition: all .3s ease-in-out;
         color: grey;
+    }
+
+    &:hover {
+
+        background-color: #F1367D;
+        color: white;
+
+        & .news__desc {
+            color: white;
+        }
     }
 }
