@@ -1,0 +1,29 @@
+.support {
+    &__title {
+        color: #212529;
+        font-size: 34.875px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    &__flex {
+        display: flex;
+        margin-top: 37px;
+
+        &__left {
+            margin-right: 74px;
+            color: #000;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 400;
+        }
+        &__right {
+            &__top {
+                margin-bottom: 19px;
+            }
+            &__bottom {
+                display: block;
+            }
+        }
+    }
+}

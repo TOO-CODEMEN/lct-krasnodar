@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export const Lessons = () => {
+export const LessonsPage = () => {
     return (
         <div>
             Обучение и тесты

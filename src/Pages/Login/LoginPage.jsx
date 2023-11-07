@@ -4,7 +4,7 @@ import styles from './Login.module.scss'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export const Login = () => {
+export const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
