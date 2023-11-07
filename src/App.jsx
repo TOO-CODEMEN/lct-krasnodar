@@ -6,8 +6,14 @@ import { Journal } from './Pages/Journal/Journal'
 import { Missions } from './Pages/Missions/Missions'
 import { Header } from './Components/Header/Header'
 import { Lessons } from './Pages/Lessons/Lessons'
-
+import { isLoggedIn } from './session'
+import { Login } from './Pages/Login/Login'
 function App() {
+
+	if (!isLoggedIn()) {
+		return <Login />
+	}
+
 	return (
 		<BrowserRouter>
 			<div className={styles.container}>
