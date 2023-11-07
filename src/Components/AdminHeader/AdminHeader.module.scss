@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #404551;
+    padding: 20px 31px 20px 31px;
+
+    &__nav {
+        display: flex;
+        width: 80%;
+        &__link {
+            color: #fff;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+
+            &:not(:last-child) {
+                margin-right: 20px;
+            }
+
+            &:hover {
+                color: #F1367D;
+            }
+        }
+    }
+
+
+    &__lk {
+        &__link {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            & span {
+                margin-right: 10px;
+            }
+            & img {
+                width: 28px;
+                height: 28px;
+                border: 1px solid #F1367D;
+                border-radius: 20px;
+            }
+
+            &:hover {
+                color: #F1367D;
+            }
+        }
+    }
+}

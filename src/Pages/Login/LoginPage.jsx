@@ -3,13 +3,21 @@ import React, { useState } from 'react'
 import styles from './Login.module.scss'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useSaveUserMutation } from '../../api/users';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [saveUser, {isError}] = useSaveUserMutation()
 
-    const onSubmitHandler = (e) => {
+    const user = {
+        email,
+        password
+    }
+
+    const onSubmitHandler = async (e) => {
         e.preventDefault()
+        await saveUser(user).unwrap()
     }
 
     return (

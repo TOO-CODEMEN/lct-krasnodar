@@ -9,7 +9,14 @@ export const usersApi = createApi({
         getAllUsers: builder.query({
             query: () => `/getAllUsers`,
         }),
+        saveUser: builder.mutation({
+            query: (body) => ({
+                url: '/saveUser',
+                method: 'POST',
+                body
+            })
+        })
     }),
 })
 
-export const { useGetAllUsersQuery } = usersApi
+export const { useGetAllUsersQuery, useSaveUserMutation } = usersApi
