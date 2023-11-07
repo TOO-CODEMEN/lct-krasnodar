@@ -4,33 +4,36 @@ import { Plan } from './Pages/Plan/Plan'
 import { Journal } from './Pages/Journal/Journal'
 import { Missions } from './Pages/Missions/Missions'
 import { Header } from './Components/Header/Header'
-import { Lessons } from './Pages/Lessons/Lessons'
 import { isLoggedIn } from './session'
-import { Login } from './Pages/Login/Login'
-
-
+import { JournalPage } from './Pages/Journal/JournalPage'
+import { PlanPage } from './Pages/Plan/PlanPage'
+import { MissionsPage } from './Pages/Missions/MissionsPage'
+import { LessonsPage } from './Pages/Lessons/LessonsPage'
+import { AnswersPage } from './Pages/Answers/AnswersPage'
+import { Footer } from './Components/Footer/Footer'
 function App() {
 
-    if (isLoggedIn()) {
-        return <Login />
-    }
+	// if (!isLoggedIn()) {
+	// 	return <Login />
+	// }
 
-    return (
-        <BrowserRouter>
-            <div>
-                <Header />
-                <Routes>
-                    <Route path='/main' Component={Main} />
-                    <Route path='/journal' Component={Journal} />
-                    <Route path='/plan' Component={Plan} />
-                    <Route path='/missions' Component={Missions} />
-                    <Route path='/lessons' Component={Lessons} />
-
-                    <Route path='*' element={<Navigate to='/main' />} />
-                </Routes>
-            </div>
-        </BrowserRouter>
-    )
+	return (
+		<BrowserRouter>
+			<div>
+				<Header />
+				<Routes>
+					<Route path='/main' Component={Main} />
+					<Route path='/journal' Component={JournalPage} />
+					<Route path='/plan' Component={PlanPage} />
+					<Route path='/missions' Component={MissionsPage} />
+					<Route path='/lessons' Component={LessonsPage} />
+					<Route path='/answers' Component={AnswersPage} />
+					<Route path='*' element={<Navigate to='/main' />} />
+				</Routes>
+				<Footer />
+			</div>
+		</BrowserRouter>
+	)
 }
 
 export default App

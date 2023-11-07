@@ -3,18 +3,20 @@
     justify-content: space-between;
     align-items: center;
     background-color: #404551;
-    padding: 31px;
+    padding: 20px 31px 20px 31px;
 
     &__nav {
         display: flex;
-        justify-content: space-between;
         width: 80%;
         &__link {
             color: #fff;
             font-size: 20px;
             font-style: normal;
             font-weight: 400;
-            text-transform: uppercase;
+
+            &:not(:last-child) {
+                margin-right: 20px;
+            }
 
             &:hover {
                 color: #F1367D;

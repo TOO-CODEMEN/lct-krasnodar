@@ -1,0 +1,19 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-top: 1px solid black;
+
+    &__proscom {
+        font-weight: bold;
+        color: black;
+    }
+
+    &__toocodemen {
+        color: grey;
+        margin-top: 5px;
+        font-size: 10px;
+    }
+}

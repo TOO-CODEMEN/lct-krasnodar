@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Missions = () => {
+export const MissionsPage = () => {
     return (
         <div>
             Миссии

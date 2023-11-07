@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Plan = () => {
+export const PlanPage = () => {
     return (
         <div>
             План

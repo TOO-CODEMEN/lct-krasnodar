@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Journal = () => {
+export const JournalPage = () => {
     return (
         <div>
             Журнал
