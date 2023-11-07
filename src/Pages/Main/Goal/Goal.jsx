@@ -8,7 +8,7 @@ const Goal = ({ isError, isFetching, data }) => {
             {isError ? <div>Целей не найдено</div> : isFetching ? <CircularProgress /> :
                 <div>
                     <h2>
-                        {data[0].name}
+                        Цель: {data[0].name}
                     </h2>
                     <div className={styles.Goal_description}>
                         {data[0].description}
