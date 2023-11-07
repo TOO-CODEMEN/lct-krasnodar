@@ -2,7 +2,7 @@ import styles from './Main.module.scss'
 import Intro from './Intro/Intro'
 import Goal from './Goal/Goal'
 import UsefulMaterials from './UsefulMaterials/UsefulMaterials'
-import { Support } from '../../Components/Support/Support'
+import { Support } from './Support/Support'
 
 export const Main = () => {
 
