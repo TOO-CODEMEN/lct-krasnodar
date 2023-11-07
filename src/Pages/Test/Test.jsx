@@ -1,7 +1,6 @@
 import { CircularProgress } from "@mui/material"
 import { useGetAllUsersQuery } from "../../api/users"
 import styles from './Main.module.scss'
-import { Support } from "../../Components/Support/Support"
 
 const Test = () => {
     const { isError, isFetching, data } = useGetAllUsersQuery()
@@ -21,8 +20,6 @@ const Test = () => {
                     ))}
                 </>
             ) : null}
-
-            <Support />
         </div>
     )
 }
