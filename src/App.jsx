@@ -7,6 +7,7 @@ import { PlanPage } from './Pages/Plan/PlanPage'
 import { MissionsPage } from './Pages/Missions/MissionsPage'
 import { LessonsPage } from './Pages/Lessons/LessonsPage'
 import { AnswersPage } from './Pages/Answers/AnswersPage'
+import { Footer } from './Components/Footer/Footer'
 function App() {
 
 	// if (!isLoggedIn()) {
@@ -26,6 +27,7 @@ function App() {
 					<Route path='/answers' Component={AnswersPage} />
 					<Route path='*' element={<Navigate to='/main' />} />
 				</Routes>
+				<Footer />
 			</div>
 		</BrowserRouter>
 	)
