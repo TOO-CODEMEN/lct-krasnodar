@@ -8,6 +8,7 @@ import { PlanPage } from './Pages/Plan/PlanPage'
 import { MissionsPage } from './Pages/Missions/MissionsPage'
 import { LessonsPage } from './Pages/Lessons/LessonsPage'
 import { AnswersPage } from './Pages/Answers/AnswersPage'
+import { Chat } from './Components/Chat/Chat'
 function App() {
 
 	// if (!isLoggedIn()) {
@@ -26,8 +27,9 @@ function App() {
 					<Route path='/lessons' Component={LessonsPage} />
 					<Route path='/answers' Component={AnswersPage} />
 
-					<Route path='*' element={<Navigate to='/main'/>} />
+					<Route path='*' element={<Navigate to='/main' />} />
 				</Routes>
+				<Chat />
 			</div>
 		</BrowserRouter>
 	)
