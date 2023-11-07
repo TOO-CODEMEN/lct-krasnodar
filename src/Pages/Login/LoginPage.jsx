@@ -3,13 +3,21 @@ import React, { useState } from 'react'
 import styles from './Login.module.scss'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useSaveUserMutation } from '../../api/users';
 
-export const Login = () => {
+export const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [saveUser, {isError}] = useSaveUserMutation()
 
-    const onSubmitHandler = (e) => {
+    const user = {
+        email,
+        password
+    }
+
+    const onSubmitHandler = async (e) => {
         e.preventDefault()
+        await saveUser(user).unwrap()
     }
 
     return (
@@ -25,7 +33,7 @@ export const Login = () => {
                     type='email'
                     defaultValue={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    style={{width: '100%', marginBottom: 18, }}
+                    sx={{ width: '100%', marginBottom: 2 }}
                 />
                 <TextField
                     required
@@ -34,14 +42,15 @@ export const Login = () => {
                     type='password'
                     defaultValue={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    style={{width: '100%', marginBottom: 18}}
+                    sx={{ width: '100%', marginBottom: 2 }}
                 />
 
                 <Button
                     variant="contained"
-                    style={{width: '25%', borderRadius: 8, backgroundColor: '#E55C78' }}
+                    sx={{ ":hover": {backgroundColor: '#f3234d' } , backgroundColor: '#E55C78', width: '25%', borderRadius: 2, paddingY: 1 }}
                     onClick={(event) => onSubmitHandler(event)}
                 >Вход</Button>
+
             </div>
         </div>
     )

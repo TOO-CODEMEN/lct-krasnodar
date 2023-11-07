@@ -1,0 +1,27 @@
+.MaterialsItem {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    height: 100%;
+    background-color: #fff;
+
+    .Content {
+        padding: 20px 20px 10px;
+
+        .Tag {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .Title {
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+        .Text {
+            line-height: 1.5;
+        }
+    }
+}
