@@ -17,6 +17,7 @@ export const LoginPage = () => {
     const onSubmitHandler = async (e) => {
         e.preventDefault()
         await login({ email, password }).unwrap()
+
     }
 
     if (data) {
