@@ -1,5 +1,7 @@
 export const AdminPanel = () => {
   return (
-    <div className="container">AdminPanel</div>
+    <div className="container">
+      AdminPanel
+    </div>
   )
 }

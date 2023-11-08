@@ -17,7 +17,7 @@ export const Users = () => {
         number: "",
         telegram: "",
         primaryOnboarding: false,
-        role: 'USER'
+        role: 'ADMIN'
     }
 
     const [modalActive, setModalActive] = useState(false)
