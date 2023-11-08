@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { useLoginMutation } from '../../api/login';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/userSlice';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { startSession } from '../../session';
 
 export const LoginPage = () => {
@@ -15,9 +15,8 @@ export const LoginPage = () => {
     const dispatch = useDispatch()
 
     const onSubmitHandler = async (e) => {
-        e.preventDefault()
         await login({ email, password }).unwrap()
-
+        location.reload()
     }
 
     if (data) {

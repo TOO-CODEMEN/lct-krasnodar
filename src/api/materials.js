@@ -5,7 +5,7 @@ export const materialsApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://89.232.161.161:8080/api/materials',
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }),
     endpoints: (builder) => ({

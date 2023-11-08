@@ -17,6 +17,7 @@ export const usersSlice = createSlice({
             localStorage.clear( )
             state.currentUser = {}
             state.isAuth = false
+            location.reload()
         }
     },
 })
