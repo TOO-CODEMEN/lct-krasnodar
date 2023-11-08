@@ -16,7 +16,7 @@ export const AdminHeader = () => {
                     Пользователи
                 </NavLink>
                 <NavLink to='/materials' className={styles.header__nav__link}>
-                    Пользователи
+                    Материалы
                 </NavLink>
             </div>
         </div>

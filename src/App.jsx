@@ -10,31 +10,52 @@ import { AdminPanel } from './Pages/AdminPanel/AdminPanel'
 import { AdminHeader } from './Components/AdminHeader/AdminHeader'
 import { Users } from './Pages/AdminPanel/Users/Users'
 import { LoginPage } from './Pages/Login/LoginPage'
+import { JournalPage } from './Pages/Journal/JournalPage'
+import { Materials } from './Pages/AdminPanel/Materials/Materials'
+import { useGetUserQuery } from './api/users'
+import { useDispatch } from 'react-redux'
+import { setUser } from './redux/userSlice'
 
 function App() {
+    const { data } = useGetUserQuery(localStorage.getItem('email'))
+    const dispatch = useDispatch()
 
-	if (!isLoggedIn()) {
-		return <LoginPage />
-	}
+    // if (!isLoggedIn()) {
+    //     return <Navigate to="/login" />
+    // }
 
-	return (
-		<BrowserRouter>
-			<div>
-				<Header />
-                <AdminHeader/>
-				<Routes>
-					<Route path='/main' Component={Main} />
-					<Route path='/admin' Component={AdminPanel} />
-					<Route path='/users' Component={Users} />
-					<Route path='/plan' Component={PlanPage} />
-					<Route path='/lessons' Component={LessonsPage} />
-					<Route path='/answers' Component={AnswersPage} />
-					<Route path='*' element={<Navigate to='/main' />} />
-				</Routes>
-				<Footer />
-			</div>
-		</BrowserRouter>
-	)
+    if (data) {
+        dispatch(setUser(data))
+    }
+
+    return (
+        <BrowserRouter>
+            {isLoggedIn() ? (
+                <>
+                    <Header />
+                    <Routes>
+                        <Route path='/main' Component={Main} />
+                        <Route path='/admin' Component={AdminPanel} />
+                        <Route path='/users' Component={Users} />
+                        <Route path='/materials' Component={Materials} />
+                        <Route path='/plan' Component={PlanPage} />
+                        <Route path='/journal' Component={JournalPage} />
+                        <Route path='/lessons' Component={LessonsPage} />
+                        <Route path='/answers' Component={AnswersPage} />
+                        <Route path='*' element={<Navigate to='/main' />} />
+                    </Routes>
+                    <Footer />
+                </>
+            ) : (
+                <Routes>
+                    <Route path='/login' Component={LoginPage} />
+                    <Route path='*' element={<Navigate to='/login' />} />
+                </Routes>
+
+            )}
+
+        </BrowserRouter>
+    )
 }
 
 export default App

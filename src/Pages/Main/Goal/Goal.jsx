@@ -5,7 +5,7 @@ const Goal = ({ isError, isFetching, data }) => {
 
     return (
         <div className={styles.Goal}>
-            {isError ? <div>Целей не найдено</div> : isFetching ? <CircularProgress /> :
+            {isError ? <div>Ошибка</div> : isFetching ? <CircularProgress /> : data.length > 0 ?
                 <div>
                     <h2>
                         Цель: {data[0].name}
@@ -23,7 +23,7 @@ const Goal = ({ isError, isFetching, data }) => {
                         </div>
                     </div>
                 </div>
-            }
+            : <div>Целей не найдено</div>}
         </div>
     )
 }

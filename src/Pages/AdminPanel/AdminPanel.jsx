@@ -1,5 +1,5 @@
 export const AdminPanel = () => {
   return (
-    <div>AdminPanel</div>
+    <div className="container">AdminPanel</div>
   )
 }
