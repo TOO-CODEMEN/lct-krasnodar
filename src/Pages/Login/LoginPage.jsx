@@ -4,11 +4,12 @@ import styles from './Login.module.scss'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useSaveUserMutation } from '../../api/users';
+import { useLoginMutation } from '../../api/login';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [saveUser, {isError}] = useSaveUserMutation()
+    const [saveUser, {isError}] = useLoginMutation()
 
     const user = {
         email,
