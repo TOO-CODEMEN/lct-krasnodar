@@ -11,7 +11,7 @@ import { startSession } from '../../session';
 export const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [login, { isError, isLoading, data }] = useLoginMutation()
+    const [login, { isLoading, data }] = useLoginMutation()
     const dispatch = useDispatch()
 
     const onSubmitHandler = async (e) => {
@@ -25,7 +25,6 @@ export const LoginPage = () => {
 
     return (
         <div className={styles.login}>
-            {isLoading && <div>Загрузка</div>}
             <div className={styles.login__title}>
                 Вход
             </div>
@@ -53,6 +52,7 @@ export const LoginPage = () => {
                     variant="contained"
                     sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', width: '25%', borderRadius: 2, paddingY: 1 }}
                     onClick={onSubmitHandler}
+                    disabled={isLoading}
                 >Вход</Button>
 
             </div>
