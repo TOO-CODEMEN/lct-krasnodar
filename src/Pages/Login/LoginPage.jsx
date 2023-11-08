@@ -14,10 +14,9 @@ export const LoginPage = () => {
     const [login, { isError, isLoading, data }] = useLoginMutation()
     const dispatch = useDispatch()
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault()
         await login({ email, password }).unwrap()
-
     }
 
     if (data) {
