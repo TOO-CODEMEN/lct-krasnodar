@@ -1,9 +1,13 @@
 import React from 'react'
 import styles from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
+import { Button } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { logOut } from '../../redux/userSlice'
 
 
 export const Header = () => {
+    const dispatch = useDispatch()
 
     const goToUser = () => {
         return
@@ -36,6 +40,7 @@ export const Header = () => {
                     </span>
                     <img src='https://fond-vsem-mirom.ru/wp-content/uploads/2022/05/img_2957.jpeg'/>
                 </a>
+                <Button onClick={() => dispatch(logOut())}>Выход</Button>
             </div>
         </div>
     )
