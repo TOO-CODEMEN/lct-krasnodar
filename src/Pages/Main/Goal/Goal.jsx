@@ -6,8 +6,9 @@ import { useGetTasksByUserIdQuery } from '../../../api/tasks'
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser.id)
     const { isError, isFetching, data } = useGetTasksByUserIdQuery(selector)
-    const timestamp = data && data[0].deadline; 
-    const date = new Date(timestamp);
+    if (data && data.length > 0) {
+        var date = new Date(data[0].deadline)
+    }
 
     return (
         <div className={styles.Goal}>
