@@ -16,19 +16,29 @@ export const Header = () => {
     return (
         <div className={styles.header}>
             <div className={styles.header__nav}>
-                <NavLink to='/main' className={styles.header__nav__link}>
+                <NavLink to='/main' className={({ isActive }) =>
+                    isActive ? `${styles.header__nav__link} ${styles.active}` : styles.header__nav__link
+                }>
                     Главная
                 </NavLink>
-                <NavLink to='/journal' className={styles.header__nav__link}>
+                <NavLink to='/journal' className={({ isActive }) =>
+                    isActive ? `${styles.header__nav__link} ${styles.active}` : styles.header__nav__link
+                }>
                     Журнал
                 </NavLink>
-                <NavLink to='/plan' className={styles.header__nav__link}>
+                <NavLink to='/plan' className={({ isActive }) =>
+                    isActive ? `${styles.header__nav__link} ${styles.active}` : styles.header__nav__link
+                }>
                     План
                 </NavLink>
-                <NavLink to='/lessons' className={styles.header__nav__link}>
+                <NavLink to='/lessons' className={({ isActive }) =>
+                    isActive ? `${styles.header__nav__link} ${styles.active}` : styles.header__nav__link
+                }>
                     Курс
                 </NavLink>
-                <NavLink to='/answers' className={styles.header__nav__link}>
+                <NavLink to='/answers' className={({ isActive }) =>
+                    isActive ? `${styles.header__nav__link} ${styles.active}` : styles.header__nav__link
+                }>
                     Ответы на вопросы
                 </NavLink>
             </div>
@@ -38,7 +48,7 @@ export const Header = () => {
                     <span>
                         Email
                     </span>
-                    <img src='https://fond-vsem-mirom.ru/wp-content/uploads/2022/05/img_2957.jpeg'/>
+                    <img src='https://fond-vsem-mirom.ru/wp-content/uploads/2022/05/img_2957.jpeg' />
                 </a>
                 <Button onClick={() => dispatch(logOut())}>Выход</Button>
             </div>
