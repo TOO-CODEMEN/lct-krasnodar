@@ -5,7 +5,6 @@ import UsefulMaterials from './UsefulMaterials/UsefulMaterials'
 export const Main = () => {
     return (
         <div className={styles.Main}>
-
             <Goal/>
             <UsefulMaterials />
         </div>

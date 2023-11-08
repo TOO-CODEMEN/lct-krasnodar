@@ -1,6 +1,12 @@
 .MaterialsItems {
     display: flex;
     gap: 45px;
+
+
+    &__nothing {
+        text-align: center;
+        color: grey;
+    }
 }
 
 .UsefulMaterials {
