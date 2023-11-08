@@ -4,7 +4,7 @@
 http://too-codemen.ru/
 
 ## Особенности
-TODO
+1. Интеграция сервиса с VK
 
 ## Технологический стек
 - __Backend:__ Java, Spring
