@@ -18,8 +18,10 @@ import { setUser } from './redux/userSlice'
 import { useEffect } from 'react'
 import { Cabinet } from './Pages/Cabinet/CabinetPage'
 
+
 function App() {
-    const { data } = useGetUserQuery(localStorage.getItem('email'))
+    const email = localStorage.getItem('email')
+    const { data } = email ? useGetUserQuery(email) : false
     const dispatch = useDispatch()
     const role = useSelector((state) => state.user.currentUser.role)
 
@@ -30,9 +32,12 @@ function App() {
     useEffect(() => {
         if (data) {
             dispatch(setUser(data))
-            console.log(data)
+            if (role === "USER") {
+                VK.Widgets.CommunityMessages("vk_community_messages", 223332793, { tooltipButtonText: "Есть вопрос?" })
+            }
         }
-    }, [data])
+    }, [data, role])
+
 
     return (
         <>
@@ -57,6 +62,7 @@ function App() {
                         <Route path='/lk' Component={Cabinet} />
                         <Route path='*' element={<Navigate to='/main' />} />
                     </Routes>
+                    <div id="vk_community_messages"></div>
                     <Footer />
                 </BrowserRouter>
             }
