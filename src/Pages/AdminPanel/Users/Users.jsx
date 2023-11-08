@@ -125,7 +125,7 @@ export const Users = () => {
                 ) : data ? (
                     <>
                         {data.map((user) => (
-                            <User user={user} key={user.id} />
+                            <User refetch={refetch} user={user} key={user.id} />
                         ))}
                     </>
                 ) : null}
