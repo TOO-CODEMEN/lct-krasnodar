@@ -1,17 +1,14 @@
 import styles from './Main.module.scss'
 import Goal from './Goal/Goal'
 import UsefulMaterials from './UsefulMaterials/UsefulMaterials'
-import { Support } from './Support/Support'
-import { useGetTasksByUserIdQuery } from '../../api/tasks'
-import { useSelector } from 'react-redux'
+import Statistics  from './Statistics/Statistics'
 
 export const Main = () => {
     return (
         <div className={styles.Main}>
-
             <Goal/>
+            <Statistics />
             <UsefulMaterials />
-            <Support />
         </div>
     )
 }
