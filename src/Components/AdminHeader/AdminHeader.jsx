@@ -9,20 +9,19 @@ import { logOut } from '../../redux/userSlice'
 export const AdminHeader = () => {
     const dispatch = useDispatch()
 
-    const goToUser = () => {
-        return
-    }
-
     return (
         <div className={styles.header}>
             <div className={styles.header__nav}>
-                <NavLink to='/users' className={styles.header__nav__link}>
-                    Пользователи
-                </NavLink>
-                <NavLink to='/materials' className={styles.header__nav__link}>
-                    Материалы
-                </NavLink>
-                <Button onClick={() => dispatch(logOut())}>
+                <div className={styles.navigation}>
+                    <NavLink to='/users' className={styles.header__nav__link}>
+                        Пользователи
+                    </NavLink>
+                    <NavLink to='/materials' className={styles.header__nav__link}>
+                        Материалы
+                    </NavLink>
+                </div>
+
+                <Button onClick={() => dispatch(logOut())} sx={{color: 'white'}}>
                     Выход
                 </Button>
             </div>

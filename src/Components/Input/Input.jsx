@@ -11,7 +11,7 @@ export const Input = (props) => {
             ) : event.target.value))}
             required
             label={props.label}
-            value={props.value}
+            defaultValue={props.value}
             type={props.type}
             sx={{ width: '500px', marginBottom: 2 }}
         />

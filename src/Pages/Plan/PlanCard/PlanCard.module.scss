@@ -1,0 +1,21 @@
+.planCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-left: 8px solid #F1367D;
+    background-color: #F5F5F5;
+    margin-bottom: 25px;
+
+    &__left {
+        &__name {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+
+        &__desc {
+            margin-bottom: 20px;
+        }
+    }
+}
