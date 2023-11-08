@@ -9,7 +9,7 @@ import { useLoginMutation } from '../../api/login';
 export const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [saveUser, {isError}] = useLoginMutation()
+    const [login, {isError}] = useLoginMutation()
 
     const user = {
         email,
@@ -18,7 +18,7 @@ export const LoginPage = () => {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
-        await saveUser(user).unwrap()
+        await login(user).unwrap()
     }
 
     return (

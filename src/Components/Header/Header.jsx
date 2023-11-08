@@ -24,9 +24,6 @@ export const Header = () => {
                 <NavLink to='/lessons' className={styles.header__nav__link}>
                     Курс
                 </NavLink>
-                <NavLink to='/missions' className={styles.header__nav__link}>
-                    Миссии
-                </NavLink>
                 <NavLink to='/answers' className={styles.header__nav__link}>
                     Ответы на вопросы
                 </NavLink>

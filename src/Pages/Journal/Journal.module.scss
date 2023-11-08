@@ -1,0 +1,12 @@
+.journal {
+    padding: 30px;
+
+    &__modal {
+        &__title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+}
