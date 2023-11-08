@@ -16,20 +16,22 @@ export const Users = () => {
         email: "",
         number: "",
         telegram: "",
+        startTime: "",
         primaryOnboarding: false,
-        role: 'ADMIN'
+        role: 'USER'
     }
 
     const [modalActive, setModalActive] = useState(false)
-    const [saveUser] = useSaveUserMutation()
-    const { isFetching, data } = useGetAllUsersQuery()
+    const [saveUser, {fulfilledTimeStamp}] = useSaveUserMutation()
+    const { isFetching, data, refetch } = useGetAllUsersQuery()
     const [form, setForm] = useState(initialForm)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await saveUser(form).unwrap()
+        await saveUser({...form, startTime: Date.now()}).unwrap()
         setModalActive(false)
         setForm(initialForm)
+        refetch()
     }
 
     return (
