@@ -4,10 +4,16 @@ export const usersApi = createApi({
     reducerPath: 'usersApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://89.232.161.161:8080/api/users',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
     }),
     endpoints: (builder) => ({
         getAllUsers: builder.query({
             query: () => `/getAllUsers`,
+        }),
+        getUser: builder.query({
+            query: (email) => `/showUserInfo/${email}`
         }),
         saveUser: builder.mutation({
             query: (body) => ({
@@ -19,4 +25,4 @@ export const usersApi = createApi({
     }),
 })
 
-export const { useGetAllUsersQuery, useSaveUserMutation } = usersApi
+export const { useGetAllUsersQuery, useGetUserQuery, useSaveUserMutation } = usersApi
