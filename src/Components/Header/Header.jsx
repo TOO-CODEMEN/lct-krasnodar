@@ -44,13 +44,13 @@ export const Header = () => {
             </div>
 
             <div className={styles.header__lk}>
-                <a onClick={() => goToUser()} className={styles.header__lk__link} href='#'>
+                <NavLink onClick={() => goToUser()} className={styles.header__lk__link} to='/lk'>
                     <span>
-                        Email
+                        {localStorage.getItem('email')}
                     </span>
                     <img src='https://fond-vsem-mirom.ru/wp-content/uploads/2022/05/img_2957.jpeg' />
-                </a>
-                <Button onClick={() => dispatch(logOut())}>Выход</Button>
+                </NavLink>
+                <Button onClick={() => dispatch(logOut())}  sx={{ ":hover": { color: '#f3234d' }, color: 'white'}}>Выход</Button>
             </div>
         </div>
     )

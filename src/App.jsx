@@ -16,6 +16,7 @@ import { useGetUserQuery } from './api/users'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from './redux/userSlice'
 import { useEffect } from 'react'
+import { Cabinet } from './Pages/Cabinet/CabinetPage'
 
 function App() {
     const { data } = useGetUserQuery(localStorage.getItem('email'))
@@ -53,6 +54,7 @@ function App() {
                         <Route path='/journal' Component={JournalPage} />
                         <Route path='/lessons' Component={LessonsPage} />
                         <Route path='/answers' Component={AnswersPage} />
+                        <Route path='/lk' Component={Cabinet} />
                         <Route path='*' element={<Navigate to='/main' />} />
                     </Routes>
                     <Footer />

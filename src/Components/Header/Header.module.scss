@@ -8,11 +8,13 @@
     &__nav {
         display: flex;
         width: 80%;
+
         &__link {
             color: #fff;
             font-size: 20px;
             font-style: normal;
             font-weight: 400;
+            transition: all .3s ease-in-out;
 
             &:not(:last-child) {
                 margin-right: 20px;
@@ -26,13 +28,17 @@
 
 
     &__lk {
+        display: flex;
+
         &__link {
             display: flex;
             align-items: center;
             color: #fff;
+
             & span {
                 margin-right: 10px;
             }
+
             & img {
                 width: 28px;
                 height: 28px;
