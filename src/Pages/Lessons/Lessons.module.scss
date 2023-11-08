@@ -1,4 +1,9 @@
 .lessons {
     padding: 31px;
     min-height: 80vh;
+
+    &__title {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
 }
