@@ -1,7 +1,13 @@
 import styles from './Goal.module.scss'
 import { CircularProgress } from "@mui/material"
+import { useSelector } from 'react-redux'
+import { useGetTasksByUserIdQuery } from '../../../api/tasks'
 
-const Goal = ({ isError, isFetching, data }) => {
+const Goal = () => {
+    const selector = useSelector((state) => state.user.currentUser.id)
+    const { isError, isFetching, data } = useGetTasksByUserIdQuery(selector)
+    const timestamp = data && data[0].deadline; 
+    const date = new Date(timestamp);
 
     return (
         <div className={styles.Goal}>
@@ -19,11 +25,11 @@ const Goal = ({ isError, isFetching, data }) => {
                             {data[0].status ? <span style={{ color: 'green' }}>Сделано</span> : <span style={{ color: 'red' }}>Не сделано</span>}
                         </div>
                         <div>
-                            Дедлайн: {data[0].deadline}
+                            Дедлайн: {date.getDate()}.{date.getMonth()}.{date.getFullYear()}
                         </div>
                     </div>
                 </div>
-            : <div>Целей не найдено</div>}
+                : <div>Целей не найдено</div>}
         </div>
     )
 }

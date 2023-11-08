@@ -10,10 +10,10 @@ export const tasksApi = createApi({
         }
     }),
     endpoints: (builder) => ({
-        getAllTasks: builder.query({
-            query: () => `/getAllTasks`,
+        getTasksByUserId: builder.query({
+            query: (id) => `/getTasksByUserId/${id}`,
         }),
     }),
 })
 
-export const { useGetAllTasksQuery } = tasksApi
+export const { useGetTasksByUserIdQuery } = tasksApi

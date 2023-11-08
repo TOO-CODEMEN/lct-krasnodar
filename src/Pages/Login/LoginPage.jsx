@@ -15,6 +15,7 @@ export const LoginPage = () => {
     const dispatch = useDispatch()
 
     const onSubmitHandler = async (e) => {
+        e.preventDefault()
         await login({ email, password }).unwrap()
         location.reload()
     }
@@ -28,7 +29,7 @@ export const LoginPage = () => {
             <div className={styles.login__title}>
                 Вход
             </div>
-            <div className={styles.login__form}>
+            <form className={styles.login__form} onSubmit={onSubmitHandler}>
                 <TextField
                     required
                     id="outlined"
@@ -50,12 +51,13 @@ export const LoginPage = () => {
 
                 <Button
                     variant="contained"
+                    type='submit'
                     sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', width: '25%', borderRadius: 2, paddingY: 1 }}
                     onClick={onSubmitHandler}
                     disabled={isLoading}
                 >Вход</Button>
 
-            </div>
+            </form>
         </div>
     )
 }
