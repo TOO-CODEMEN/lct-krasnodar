@@ -35,7 +35,7 @@ export const tasksApi = createApi({
                 url: `/deleteTask/${id}`,
                 method: 'DELETE'
             })
-        })
+        }),
         getTasksByCourseId: builder.query({
             query: (id) => `/getTasksByCourseId/${id}`,
         }),

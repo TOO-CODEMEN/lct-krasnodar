@@ -2,12 +2,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './Cabinet.module.scss'
 import { Button } from '@mui/material';
 import { logOut } from '../../redux/userSlice';
+import { formatTimestamp } from '../../utils/script';
 
 export const Cabinet = () => {
 
     const data = useSelector((state) => state.user.currentUser)
-    const timestamp = data.startTime; // example timestamp
-    const date = new Date(timestamp);
 
     const dispatch = useDispatch()
 
@@ -27,7 +26,7 @@ export const Cabinet = () => {
 
             <div className={styles.cabinet__middle}>
                 <div className={styles.cabinet__middle__date}>
-                    Зарегистрирован с <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
+                    Зарегистрирован с <span>{formatTimestamp(data.startTime)}</span>
                 </div>
                 <div className={styles.cabinet__middle__number}>
                     Номер телефона: <a href={`tel:${data.number}`}>{data.number}</a>

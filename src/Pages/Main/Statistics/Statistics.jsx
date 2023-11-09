@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { PieChart, Pie, Legend, Tooltip, Cell, ResponsiveContainer } from "recharts";
 import styles from './Statistics.module.scss'
 import { Box, LinearProgress, Typography } from "@mui/material";
+import { formatTimestamp } from "../../../utils/script";
 
 function LinearProgressWithLabel(props) {
   return (
@@ -20,8 +21,6 @@ function LinearProgressWithLabel(props) {
 export default function Statistics() {
 
   const user = useSelector((state) => state.user.currentUser)
-  const timestamp = user.finishTime
-  const date = new Date(timestamp)
   console.log(user)
 
   const data02 = [
@@ -71,7 +70,7 @@ export default function Statistics() {
           </div>
 
           <div className={styles.statistics__metrika__right__important}>
-            Курс необходимо закончить до: <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
+            Курс необходимо закончить до: <span>{formatTimestamp(user.finishTime)}</span>
           </div>
         </div>
       </div> : <div>Ошибка</div>}

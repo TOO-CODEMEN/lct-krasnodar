@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material"
 import { useSelector } from 'react-redux'
 import { useGetTasksByCourseIdQuery } from '../../../api/tasks'
 import { useGetCoursesByUserIdQuery } from '../../../api/lessons'
+import { formatTimestamp } from '../../../utils/script'
 
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser.id)
@@ -12,10 +13,6 @@ const Goal = () => {
         var courseId = data[4].id
     }
     const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
-
-    if (dataTasks && dataTasks.length > 0) {
-        var date = new Date(dataTasks[0].deadline)
-    }
 
     return (
         <div className={styles.Goal}>
@@ -33,7 +30,7 @@ const Goal = () => {
                             {dataTasks[0].status ? <span style={{ color: 'green' }}>Сделано</span> : <span style={{ color: 'red' }}>Не сделано</span>}
                         </div>
                         <div>
-                            Дедлайн: {date.getDate()}.{date.getMonth()}.{date.getFullYear()}
+                            Дедлайн: {formatTimestamp(dataTasks[0].deadline)}
                         </div>
                     </div>
                 </div>
