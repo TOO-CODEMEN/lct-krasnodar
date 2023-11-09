@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    users: []
+    users: [],
+    materials: [],
+    tasks: [],
+    courses: [],
 }
 
 export const adminSlice = createSlice({
@@ -19,10 +22,35 @@ export const adminSlice = createSlice({
         },
         deleteUser(state, action) {
             state.users = state.users.filter((user) => user.id != action.payload)
+        },
+
+        setMaterials(state, action) {
+            state.materials = action.payload
+        },
+        updateMaterial(state, action) {
+            const index = state.materials.findIndex(material => material.id == action.payload.id)
+            if (index !== -1) {
+                state.materials[index] = action.payload
+            }
+        },
+        deleteMaterial(state, action) {
+            state.materials = state.materials.filter((material) => material.id != action.payload)
+        },
+        setTasks(state, action) {
+            state.tasks = action.payload
+        },
+        updateTask(state, action) {
+            const index = state.tasks.findIndex(task => task.id == action.payload.id)
+            if (index !== -1) {
+                state.tasks[index] = action.payload
+            }
+        },
+        deleteTask(state, action) {
+            state.tasks = state.tasks.filter((task) => task.id != action.payload)
         }
     },
 })
 
-export const { setUsers, deleteUser, updateUser } = adminSlice.actions
+export const { setUsers, deleteUser, updateUser, setMaterials, deleteMaterial, updateMaterial, setTasks, deleteTask, updateTask } = adminSlice.actions
 
 export default adminSlice.reducer

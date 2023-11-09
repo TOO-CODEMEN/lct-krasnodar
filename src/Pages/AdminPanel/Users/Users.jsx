@@ -1,40 +1,44 @@
-import { Button, CircularProgress, Modal, TextField } from '@mui/material'
+import { Button, CircularProgress, Modal } from '@mui/material'
 import styles from './Users.module.scss'
 import { useEffect, useState } from 'react'
-import { Input } from '../../../Components/Input/Input'
 import { useGetAllUsersQuery, useSaveUserMutation } from '../../../api/users'
 import { User } from './User/User'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUsers } from '../../../redux/adminSlice'
+import { useForm } from 'react-hook-form'
 
 export const Users = () => {
-    const initialForm = {
-        name: "",
-        surname: "",
-        patronymic: "",
-        password: "",
-        position: "",
-        email: "",
-        number: "",
-        telegram: "",
-        startTime: "",
-        primaryOnboarding: false,
-        role: 'USER'
+    const {
+        register,
+        handleSubmit,
+        reset,
+    } = useForm({
+        defaultValues: {
+            role: "USER",
+            primaryOnboarding: false,
+            startTime: ""
+        }
+    })
+
+    const style = {
+        ":hover": { backgroundColor: '#f3234d' },
+        backgroundColor: '#E55C78',
+        borderRadius: 2,
+        paddingY: 1
     }
 
     const [modalActive, setModalActive] = useState(false)
     const [saveUserMutation] = useSaveUserMutation()
     const { isFetching, data, refetch } = useGetAllUsersQuery()
-    const [form, setForm] = useState(initialForm)
     const dispatch = useDispatch()
     const users = useSelector(state => state.admin.users)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await saveUserMutation({ ...form, startTime: Date.now() }).unwrap()
-        refetch()
+    const onSubmit = async (data) => {
+        // await saveUserMutation({ ...form, startTime: Date.now() }).unwrap()
+        console.log({ ...data, startTime: Date.now() })
+        // refetch()
         setModalActive(false)
-        setForm(initialForm)
+        reset()
     }
 
     useEffect(() => {
@@ -46,85 +50,42 @@ export const Users = () => {
             <div className={styles.saveUser}>
                 <Button
                     variant="contained"
-                    sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', borderRadius: 2, paddingY: 1, marginBottom: 3 }}
+                    sx={style}
                     onClick={() => setModalActive(true)}
                 >Создать пользователя</Button>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
                     <div className={styles.userFormWrapper}>
-
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <h3>Создание пользователя</h3>
-                            <Input
-                                required
-                                label="Фамилия"
-                                value={form.surname}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'surname'}
-                            />
-                            <Input
-                                required
-                                label="Имя"
-                                value={form.name}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'name'}
-                            />
-
-                            <Input
-                                required
-                                label="Отчество"
-                                value={form.patronymic}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'patronymic'}
-                            />
-                            <Input
-                                required
-                                label="Электронная почта"
-                                type='email'
-                                value={form.email}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'email'}
-                            />
-                            <Input
-                                required
-                                label="Пароль"
-                                value={form.password}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'password'}
-                            />
-                            <Input
-                                required
-                                label="Должность"
-                                value={form.position}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'position'}
-                            />
-                            <Input
-                                required
-                                label="Номер телефона"
-                                value={form.number}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'number'}
-                            />
-                            <Input
-                                required
-                                label="Аккаунт Telegram"
-                                value={form.telegram}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'telegram'}
-                            />
+                            <input
+                                placeholder='Фамилия'
+                                {...register("surname")} />
+                            <input
+                                placeholder='Имя'
+                                {...register("name")} />
+                            <input
+                                placeholder='Отчество'
+                                {...register("patronymic")} />
+                            <input
+                                placeholder='Электронная почта'
+                                {...register("email")} />
+                            <input
+                                placeholder='Пароль'
+                                {...register("password")} />
+                            <input
+                                placeholder='Должность'
+                                {...register("position")} />
+                            <input
+                                placeholder='Номер телефона'
+                                {...register("number")} />
+                            <input
+                                placeholder='Аккаунт Telegram'
+                                {...register("telegram")} />
                             <Button
                                 variant="contained"
-                                sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', borderRadius: 2, paddingY: 1, alignSelf: 'flex-start' }}
+                                sx={style}
                                 type='submit'
-                            >Создать</Button>
+                            >Добавить</Button>
                         </form>
                     </div>
                 </Modal>
