@@ -2,12 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     background-color: #404551;
     padding: 20px 31px 20px 31px;
 
     &__nav {
         display: flex;
-        width: 80%;
 
         &__link {
             color: #fff;
@@ -48,6 +48,28 @@
 
             &:hover {
                 color: #F1367D;
+            }
+        }
+    }
+
+    @media(max-width: 850px) {
+        flex-direction: column;
+
+        &__nav {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media(max-width: 566px) {
+        &__nav {
+            flex-wrap: wrap;
+            justify-content: center;
+
+            &__link {
+
+                &:last-child{
+                    margin-top: 10px;
+                }
             }
         }
     }

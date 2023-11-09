@@ -37,4 +37,14 @@
             }
         }
     }
+    
+    @media(max-width: 600px) {
+        &__metrika {
+            display: block;
+
+            &__right {
+                margin-top: 20px;
+            }
+        }
+    }
 }
