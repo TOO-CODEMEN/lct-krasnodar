@@ -27,7 +27,7 @@ export const Cabinet = () => {
 
             <div className={styles.cabinet__middle}>
                 <div className={styles.cabinet__middle__date}>
-                    Зарегестрирован с <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
+                    Зарегистрирован с <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
                 </div>
                 <div className={styles.cabinet__middle__number}>
                     Номер телефона: <a href={`tel:${data.number}`}>{data.number}</a>
