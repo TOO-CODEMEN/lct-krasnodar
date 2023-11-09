@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 
 export const LessonsPage = () => {
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
+    console.log(data)
 
     return (
         <div className={styles.lessons}>
