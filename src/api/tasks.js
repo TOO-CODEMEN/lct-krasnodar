@@ -13,7 +13,33 @@ export const tasksApi = createApi({
         getTasksByUserId: builder.query({
             query: (id) => `/getTasksByUserId/${id}`,
         }),
+        getAllTasks: builder.query({
+            query: () => `/getAllTasks`,
+        }),
+        saveTask: builder.mutation({
+            query: (body) => ({
+                url: '/saveTask',
+                method: 'POST',
+                body
+            })
+        }),
+        updateTask: builder.mutation({
+            query: (body) => ({
+                url: `/updateTask/${body.id}`,
+                method: 'PATCH',
+                body
+            })
+        }),
+        deleteTask: builder.mutation({
+            query: (id) => ({
+                url: `/deleteTask/${id}`,
+                method: 'DELETE'
+            })
+        }),
+        getTasksByCourseId: builder.query({
+            query: (id) => `/getTasksByCourseId/${id}`,
+        }),
     }),
 })
 
-export const { useGetTasksByUserIdQuery } = tasksApi
+export const { useGetTasksByUserIdQuery, useGetAllTasksQuery, useSaveTaskMutation, useDeleteTaskMutation, useUpdateTaskMutation, useGetTasksByCourseIdQuery } = tasksApi

@@ -1,22 +1,21 @@
 import { Button, CircularProgress, Modal } from '@mui/material'
-import styles from './Materials.module.scss'
+import styles from './Tasks.module.scss'
 import { useEffect, useState } from 'react'
-import { useGetAllMaterialsQuery, useSaveMaterialMutation } from '../../../api/materials'
-import { Material } from './Material/Material'
+import { useGetAllTasksQuery, useSaveTaskMutation } from '../../../api/tasks'
+import { Task } from './Task/Task'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMaterials } from '../../../redux/adminSlice'
+import { setTasks } from '../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
 
-export const Materials = () => {
+export const Tasks = () => {
     const {
         register,
         handleSubmit,
         reset,
     } = useForm({
         defaultValues: {
-            role: "USER",
-            primaryOnboarding: false,
-            startTime: ""
+            timeOfCreation: "",
+            status: false
         }
     })
 
@@ -28,49 +27,50 @@ export const Materials = () => {
     }
 
     const [modalActive, setModalActive] = useState(false)
-    const [saveMaterialMutation] = useSaveMaterialMutation()
-    const { isFetching, data, refetch } = useGetAllMaterialsQuery()
+    const [saveTaskMutation] = useSaveTaskMutation()
+    const { isFetching, data, refetch } = useGetAllTasksQuery()
     const dispatch = useDispatch()
-    const materials = useSelector(state => state.admin.materials)
+    const tasks = useSelector(state => state.admin.tasks)
 
     const onSubmit = async (data) => {
-        await saveMaterialMutation(data).unwrap()
-        console.log(data)
+        data.deadline = Date.parse(data.deadline)
+        await saveTaskMutation(data).unwrap()
         refetch()
         setModalActive(false)
         reset()
     }
 
     useEffect(() => {
-        data ? dispatch(setMaterials(data)) : null
+        data ? dispatch(setTasks(data)) : null
     }, [data])
 
     return (
         <div className='container'>
-            <div className={styles.saveMaterial}>
+            <div className={styles.saveTask}>
                 <Button
                     variant="contained"
                     sx={style}
                     onClick={() => setModalActive(true)}
-                >Добавить материал</Button>
+                >Добавить задачу</Button>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
-                    <div className={styles.materialFormWrapper}>
+                    <div className={styles.taskFormWrapper}>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <h3>Добавление материала</h3>
+                            <h3>Добавление задачи</h3>
                             <input
-                                placeholder='Название материала'
+                                placeholder='Название задачи'
                                 {...register("name")} />
                             <input
                                 placeholder='Описание'
                                 {...register("description")} />
                             <input
-                                placeholder='К какому курсу прикрепить материал'
-                                {...register("course")} />
-                            <input
-                                placeholder='Ссылка на скачивание материала'
-                                {...register("link")} />
+                                placeholder='Дедлайн'
+                                type='datetime-local'
+                                {...register("deadline")} />
                             <input
                                 placeholder='Ссылка на тестирование'
+                                {...register("link")} />
+                            <input
+                                placeholder='К какому курсу прикрепить задачу'
                                 {...register("yandexFormsLink")} />
                             <Button
                                 variant="contained"
@@ -81,14 +81,14 @@ export const Materials = () => {
                     </div>
                 </Modal>
             </div>
-            <div className={styles.Materials}>
-                <h2>Все материалы</h2>
+            <div className={styles.Tasks}>
+                <h2>Все задачи</h2>
                 {isFetching ? (
                     <CircularProgress />
-                ) : materials ? (
+                ) : tasks ? (
                     <>
-                        {materials.map((material) => (
-                            <Material material={material} key={material.id} />
+                        {tasks.map((task) => (
+                            <Task task={task} key={task.id} />
                         ))}
                     </>
                 ) : null}

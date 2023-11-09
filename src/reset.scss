@@ -109,9 +109,10 @@ section {
 body {
 	line-height: 1;
 }
-
-ol,
-ul {
+input {
+    font: inherit;
+}
+ol, ul {
 	list-style: none;
 }
 

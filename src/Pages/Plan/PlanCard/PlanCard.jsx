@@ -1,10 +1,8 @@
 
+import { formatTimestamp } from '../../../utils/script';
 import styles from './PlanCard.module.scss'
 
 export const PlanCard = ({ data }) => {
-
-    const timestamp = data && data.deadline
-    const date = new Date(timestamp);
     return (
         <div className={styles.planCard}>
             <div className={styles.planCard__left}>
@@ -22,7 +20,7 @@ export const PlanCard = ({ data }) => {
             </div>
 
             <div className={styles.planCard__right}>
-                Дедлайн: <b>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</b>
+                Дедлайн: <b>{formatTimestamp(data.deadline, true)}</b>
             </div>
         </div>
     )

@@ -12,14 +12,30 @@ export const materialsApi = createApi({
         getAllMaterials: builder.query({
             query: () => `/getAllMaterials`,
         }),
+        getMaterialsByCourseId: builder.query({
+            query: (id) => `/getMaterialsByCourseId/${id}`,
+        }),
         saveMaterial: builder.mutation({
             query: (body) => ({
                 url: '/saveMaterial',
                 method: 'POST',
                 body
             })
+        }),
+        updateMaterial: builder.mutation({
+            query: (body) => ({
+                url: `/updateMaterial/${body.id}`,
+                method: 'PATCH',
+                body
+            })
+        }),
+        deleteMaterial: builder.mutation({
+            query: (id) => ({
+                url: `/deleteMaterialById/${id}`,
+                method: 'DELETE'
+            })
         })
     }),
 })
 
-export const { useGetAllMaterialsQuery, useSaveMaterialMutation } = materialsApi
+export const { useGetAllMaterialsQuery, useSaveMaterialMutation, useDeleteMaterialMutation, useUpdateMaterialMutation, useGetMaterialsByCourseIdQuery } = materialsApi
