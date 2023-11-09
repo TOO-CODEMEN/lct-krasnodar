@@ -38,7 +38,7 @@ export default function Statistics() {
       <div className={styles.statistics__title}>
         Статистика
       </div>
-      <div className={styles.statistics__metrika}>
+      {Object.keys(user).length > 0 ?       <div className={styles.statistics__metrika}>
         <div className={styles.statistics__metrika__left}>
           <div className={styles.statistics__metrika__left__text}>Задачи</div>
           <PieChart width={400} height={200}>
@@ -74,7 +74,7 @@ export default function Statistics() {
             Курс необходимо закончить до: <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
           </div>
         </div>
-      </div>
+      </div> : <div>Ошибка</div>}
     </div>
   );
 }
