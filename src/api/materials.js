@@ -18,8 +18,21 @@ export const materialsApi = createApi({
                 method: 'POST',
                 body
             })
+        }),
+        updateMaterial: builder.mutation({
+            query: (body) => ({
+                url: `/updateMaterial/${body.id}`,
+                method: 'PATCH',
+                body
+            })
+        }),
+        deleteMaterial: builder.mutation({
+            query: (id) => ({
+                url: `/deleteMaterialById/${id}`,
+                method: 'DELETE'
+            })
         })
     }),
 })
 
-export const { useGetAllMaterialsQuery, useSaveMaterialMutation } = materialsApi
+export const { useGetAllMaterialsQuery, useSaveMaterialMutation, useDeleteMaterialMutation, useUpdateMaterialMutation } = materialsApi

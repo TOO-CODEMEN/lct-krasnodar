@@ -19,6 +19,12 @@ export const AdminHeader = () => {
                     <NavLink to='/materials' className={styles.header__nav__link}>
                         Материалы
                     </NavLink>
+                    <NavLink to='/tasks' className={styles.header__nav__link}>
+                        Задачи
+                    </NavLink>
+                    <NavLink to='/courses' className={styles.header__nav__link}>
+                        Курсы
+                    </NavLink>
                 </div>
 
                 <Button onClick={() => dispatch(logOut())} sx={{color: 'white'}}>

@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from './redux/userSlice'
 import { useEffect } from 'react'
 import { Cabinet } from './Pages/Cabinet/CabinetPage'
+import { Tasks } from './Pages/AdminPanel/Tasks/Tasks'
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
                 <AdminHeader />
                 <Routes>
                     <Route path='/admin' Component={AdminPanel} />
+                    <Route path='/courses' Component={AdminPanel} />
+                    <Route path='/tasks' Component={Tasks} />
                     <Route path='/materials' Component={Materials} />
                     <Route path='/users' Component={Users} />
                     <Route path='*' element={<Navigate to='/admin' />} />
