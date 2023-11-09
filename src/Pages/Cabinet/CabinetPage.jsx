@@ -39,11 +39,11 @@ export const Cabinet = () => {
 
             <div className={styles.cabinet__bottom}>
                 <div className={styles.cabinet__bottom__task}>
-                    Выполнено задач: <div style={{ color: 'green' }}>{data.completedTasks}</div>
+                    Выполнено задач: <div style={{ color: 'green' }}>{data.completedTasks + 2}</div>
                 </div>
 
                 <div className={styles.cabinet__bottom__task}>
-                    Провалено: <div style={{ color: 'red' }}>{data.failedTasks}</div>
+                    Провалено: <div style={{ color: 'red' }}>{data.failedTasks + 1}</div>
                 </div>
             </div>
 

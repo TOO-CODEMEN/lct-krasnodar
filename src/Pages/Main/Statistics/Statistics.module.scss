@@ -1,0 +1,36 @@
+.statistics {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    &__title {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    &__metrika {
+        display: flex;
+
+        &__left {
+            &__text {
+                font-size: 20px;
+            }
+        }
+
+        &__right {
+            &__text {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            &__important {
+                & span {
+                    color: #E55C78;
+                }
+            }
+
+            &__progress {
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
