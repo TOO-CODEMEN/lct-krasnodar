@@ -12,6 +12,9 @@ export const materialsApi = createApi({
         getAllMaterials: builder.query({
             query: () => `/getAllMaterials`,
         }),
+        getMaterialsByCourseId: builder.query({
+            query: (id) => `/getMaterialsByCourseId/${id}`,
+        }),
         saveMaterial: builder.mutation({
             query: (body) => ({
                 url: '/saveMaterial',
@@ -22,4 +25,4 @@ export const materialsApi = createApi({
     }),
 })
 
-export const { useGetAllMaterialsQuery, useSaveMaterialMutation } = materialsApi
+export const { useGetAllMaterialsQuery, useSaveMaterialMutation, useGetMaterialsByCourseIdQuery } = materialsApi

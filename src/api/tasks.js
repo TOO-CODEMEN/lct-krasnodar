@@ -13,7 +13,10 @@ export const tasksApi = createApi({
         getTasksByUserId: builder.query({
             query: (id) => `/getTasksByUserId/${id}`,
         }),
+        getTasksByCourseId: builder.query({
+            query: (id) => `/getTasksByCourseId/${id}`,
+        }),
     }),
 })
 
-export const { useGetTasksByUserIdQuery } = tasksApi
+export const { useGetTasksByUserIdQuery, useGetTasksByCourseIdQuery } = tasksApi

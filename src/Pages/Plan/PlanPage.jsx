@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Plan.module.scss'
-import { useGetTasksByUserIdQuery } from '../../api/tasks'
+import { useGetTasksByCourseIdQuery, useGetTasksByUserIdQuery } from '../../api/tasks'
 import { useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { PlanCard } from './PlanCard/PlanCard'
@@ -8,6 +8,11 @@ import { useGetCoursesByUserIdQuery } from '../../api/lessons'
 
 export const PlanPage = () => {
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
+    if (data ) {
+        var courseId = data[4].id
+    }
+    const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
+
     return (
         <div className={styles.plan}>
             <h1 className={styles.plan__title}>
@@ -18,10 +23,10 @@ export const PlanPage = () => {
                 : isFetching ?
                     <div className={styles.center}> <CircularProgress /></div>
                     :
-                    data[0].tasks.length > 0 ?
+                    dataTasks && dataTasks.length > 0 ?
                         <div>
-                            <div className={styles.plan__data__length}>Необходимо выполнить: {data.length}</div>
-                            {data[0].tasks.map((elem, key) =>
+                            <div className={styles.plan__data__length}>Необходимо выполнить: {dataTasks.length}</div>
+                            {dataTasks.map((elem, key) =>
                                 <PlanCard data={elem} key={key}/>
                             )}
                         </div>
