@@ -4,9 +4,10 @@ import { useGetTasksByUserIdQuery } from '../../api/tasks'
 import { useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { PlanCard } from './PlanCard/PlanCard'
+import { useGetCoursesByUserIdQuery } from '../../api/lessons'
 
 export const PlanPage = () => {
-    const { isError, isFetching, data } = useGetTasksByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
+    const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
     return (
         <div className={styles.plan}>
             <h1 className={styles.plan__title}>
@@ -17,10 +18,10 @@ export const PlanPage = () => {
                 : isFetching ?
                     <div className={styles.center}> <CircularProgress /></div>
                     :
-                    data.length > 0 ?
+                    data[0].tasks.length > 0 ?
                         <div>
                             <div className={styles.plan__data__length}>Необходимо выполнить: {data.length}</div>
-                            {data.map((elem, key) =>
+                            {data[0].tasks.map((elem, key) =>
                                 <PlanCard data={elem} key={key}/>
                             )}
                         </div>

@@ -54,6 +54,10 @@ export const AnswersPage = () => {
         setExpanded(newExpanded ? panel : false);
     };
 
+    function createMarkup(stroke) { 
+        return {__html: stroke}; 
+    }
+
     return (
         <div className={styles.answers}>
             <div className={styles.answers__title}>
@@ -62,11 +66,11 @@ export const AnswersPage = () => {
             {answersData.map((elem, key) => (
                 <Accordion expanded={expanded === `panel${elem.id}`} onChange={handleChange(`panel${elem.id}`)} key={key}>
                     <AccordionSummary aria-controls={`panel${elem.id}-content`} id={`panel${elem.id}-header`}>
-                        <Typography>{elem.title}</Typography>
+                        <Typography>{key+1}. {elem.title}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            {elem.desc}
+                            <div dangerouslySetInnerHTML={createMarkup(elem.desc)}></div>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>))}

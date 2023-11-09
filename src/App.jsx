@@ -41,7 +41,7 @@ function App() {
 
     return (
         <>
-            {role === 'ADMIN' ? <BrowserRouter>
+            {!data ? <></> : role === 'ADMIN' ? <BrowserRouter>
                 <AdminHeader />
                 <Routes>
                     <Route path='/admin' Component={AdminPanel} />
