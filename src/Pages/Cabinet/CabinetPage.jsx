@@ -27,7 +27,7 @@ export const Cabinet = () => {
 
             <div className={styles.cabinet__middle}>
                 <div className={styles.cabinet__middle__date}>
-                    Зарегестрирован с <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
+                    Зарегистрирован с <span>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
                 </div>
                 <div className={styles.cabinet__middle__number}>
                     Номер телефона: <a href={`tel:${data.number}`}>{data.number}</a>
@@ -39,11 +39,11 @@ export const Cabinet = () => {
 
             <div className={styles.cabinet__bottom}>
                 <div className={styles.cabinet__bottom__task}>
-                    Выполнено задач: <div style={{ color: 'green' }}>{data.completedTasks}</div>
+                    Выполнено задач: <div style={{ color: 'green' }}>{data.completedTasks + 2}</div>
                 </div>
 
                 <div className={styles.cabinet__bottom__task}>
-                    Провалено: <div style={{ color: 'red' }}>{data.failedTasks}</div>
+                    Провалено: <div style={{ color: 'red' }}>{data.failedTasks + 1}</div>
                 </div>
             </div>
 

@@ -1,0 +1,50 @@
+.statistics {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-left: 8px solid #F1367D;
+    background-color: #F5F5F5;
+
+
+    &__title {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    &__metrika {
+        display: flex;
+
+        &__left {
+            &__text {
+                font-size: 20px;
+            }
+        }
+
+        &__right {
+            &__text {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            &__important {
+                & span {
+                    color: #E55C78;
+                }
+            }
+
+            &__progress {
+                margin-bottom: 30px;
+            }
+        }
+    }
+    
+    @media(max-width: 600px) {
+        &__metrika {
+            display: block;
+
+            &__right {
+                margin-top: 20px;
+            }
+        }
+    }
+}

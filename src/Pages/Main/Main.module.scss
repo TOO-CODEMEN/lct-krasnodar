@@ -1,7 +1,14 @@
 .Main {
     background-color: #F6F8FB;
-    padding-right: 31px;
-    padding-top: 31px;
-    padding-left: 31px;
+    padding: 31px;
     min-height: 80vh;
+    &__hello {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+
+    @media (max-width: 700px) {
+        padding: 15px;
+    }
 }
