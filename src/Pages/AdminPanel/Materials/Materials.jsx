@@ -1,6 +1,5 @@
-import { Button, TextField } from '@mui/material'
+import { Button, Modal, TextField } from '@mui/material'
 import styles from './Materials.module.scss'
-import { Modal } from '../../../Components/Modal/Modal'
 import { useState } from 'react'
 import { Input } from '../../../Components/Input/Input'
 import { useSaveMaterialMutation } from '../../../api/materials'
@@ -32,7 +31,8 @@ export const Materials = () => {
                     sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', borderRadius: 2, paddingY: 1 }}
                     onClick={() => setModalActive(true)}
                 >Добавить материал</Button>
-                <Modal active={modalActive} setActive={setModalActive}>
+                <Modal open={modalActive} onClose={() => setModalActive(false)}>
+                    <div className={styles.FormWrapper}>
                     <form onSubmit={handleSubmit}>
                         <Input
                             required
@@ -72,6 +72,7 @@ export const Materials = () => {
                             type='submit'
                         >Добавить</Button>
                     </form>
+                    </div>
                 </Modal>
             </div>
         </div>
