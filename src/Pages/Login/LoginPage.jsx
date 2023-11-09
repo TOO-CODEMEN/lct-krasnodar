@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useLoginMutation } from '../../api/login';
 import { useDispatch } from 'react-redux';
+import validator from 'validator';
 import { setUser } from '../../redux/userSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { startSession } from '../../session';
@@ -15,9 +16,22 @@ export const LoginPage = () => {
     const dispatch = useDispatch()
 
     const onSubmitHandler = async (e) => {
+
+        if (!email || !password) {
+            alert("Пожалуйста, введите почту и пароль!");
+            return;
+        } else if (!validator.isEmail(email)){
+            alert('Почта введена неверно')
+            return
+        }
         e.preventDefault()
-        await login({ email, password }).unwrap()
-        location.reload()
+        try {
+            await login({ email, password }).unwrap()
+            location.reload()
+        } catch(e) {
+            alert('Неверный логин или пароль')
+        }
+
     }
 
     if (data) {
