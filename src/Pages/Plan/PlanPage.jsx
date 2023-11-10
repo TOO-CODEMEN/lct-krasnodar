@@ -7,26 +7,22 @@ import { PlanCard } from './PlanCard/PlanCard'
 import { useGetCoursesByUserIdQuery } from '../../api/courses'
 
 export const PlanPage = () => {
-    const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
-    if (data && data.length > 0) {
-        var courseId = data[0].id
-    }
-    const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
+    const { isError, isFetching, data } = useGetTasksByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
 
     return (
         <div className={styles.plan}>
             <h1 className={styles.plan__title}>
                 План
             </h1>
-            {error ?
+            {isError ?
                 <div className={styles.plan__note}>Ошибка, попробуйте обновить страницу</div>
-                : fetching ?
+                : isFetching ?
                     <div className={styles.center}> <CircularProgress /></div>
                     :
-                    dataTasks && dataTasks.length > 0 ?
+                    data && data.length > 0 ?
                         <div>
-                            <div className={styles.plan__data__length}>Необходимо выполнить: {dataTasks.length}</div>
-                            {dataTasks.map((elem, key) =>
+                            <div className={styles.plan__data__length}>Необходимо выполнить: {data.length}</div>
+                            {data.map((elem, key) =>
                                 <PlanCard data={elem} key={key}/>
                             )}
                         </div>

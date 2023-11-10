@@ -38,4 +38,8 @@ export const coursesApi = createApi({
     }),
 })
 
-export const { useGetAllCoursesQuery, useSaveCourseMutation, useDeleteCourseMutation, useUpdateCourseMutation, useGetCoursesByUserIdQuery } = coursesApi
+export const { useGetAllCoursesQuery,
+            useSaveCourseMutation,
+            useDeleteCourseMutation,
+            useUpdateCourseMutation,
+            useGetCoursesByUserIdQuery } = coursesApi

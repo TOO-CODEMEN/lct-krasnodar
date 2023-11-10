@@ -7,8 +7,7 @@ import { formatTimestamp } from '../../utils/script'
 import { useGetMaterialsByCourseIdQuery } from '../../api/materials'
 import material1 from '../../assets/material1.jpg'
 import MaterialsItem from '../Main/UsefulMaterials/MaterialsItem/MaterialsItem'
-import DoneIcon from '@material-ui/icons/Done';
-import CloseIcon from '@material-ui/icons/Close';
+import { Close, Done } from '@mui/icons-material'
 
 
 export const LessonsPage = () => {
@@ -29,7 +28,7 @@ export const LessonsPage = () => {
                                     {data[0].name}
                                 </h1>
                                 <div className={styles.lessons__check}>
-                                    Статус: {data[0].status ? <DoneIcon color='secondary'/> : <CloseIcon color='error'/>}
+                                    Статус: {data[0].status ? <Done color='secondary'/> : <Close color='error'/>}
                                 </div>
                             </div>
 

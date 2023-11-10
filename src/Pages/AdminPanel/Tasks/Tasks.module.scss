@@ -6,6 +6,11 @@
         margin-bottom: 10px;
         margin-top: 20px;
     }
+
+}
+
+.AccordionTitle {
+    font-weight: 700;
 }
 
 .taskFormWrapper {
@@ -17,13 +22,31 @@
     background-color: white;
     border-radius: 30px;
     padding: 30px;
+
     form {
         display: flex;
         flex-direction: column;
+
         h3 {
             margin-bottom: 30px;
             font-size: 20px;
             font-weight: 700;
+        }
+
+        .Purpose {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+            label {
+                flex-direction: row;
+                align-items: center;
+                input {
+                    min-width: 0;
+                    margin: 0;
+                    margin-right: 5px;
+                }
+            }
         }
     }
 }

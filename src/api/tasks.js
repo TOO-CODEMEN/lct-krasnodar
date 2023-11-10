@@ -4,42 +4,47 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const tasksApi = createApi({
     reducerPath: 'tasksApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://89.232.161.161:8080/api/tasks',
+        baseUrl: 'http://89.232.161.161:8080/api',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }),
     endpoints: (builder) => ({
         getTasksByUserId: builder.query({
-            query: (id) => `/getTasksByUserId/${id}`,
+            query: (id) => `/tasks/getTasksByUserId/${id}`,
         }),
         getAllTasks: builder.query({
-            query: () => `/getAllTasks`,
+            query: () => `/tasks/getAllTasks`,
         }),
         saveTask: builder.mutation({
             query: (body) => ({
-                url: '/saveTask',
+                url: '/admin/tasks/saveTask',
                 method: 'POST',
                 body
             })
         }),
         updateTask: builder.mutation({
             query: (body) => ({
-                url: `/updateTask/${body.id}`,
+                url: `/tasks/updateTask/${body.id}`,
                 method: 'PATCH',
                 body
             })
         }),
         deleteTask: builder.mutation({
             query: (id) => ({
-                url: `/deleteTask/${id}`,
+                url: `/admin/tasks/deleteTask/${id}`,
                 method: 'DELETE'
             })
         }),
         getTasksByCourseId: builder.query({
-            query: (id) => `/getTasksByCourseId/${id}`,
+            query: (id) => `/tasks/getTasksByCourseId/${id}`,
         }),
     }),
 })
 
-export const { useGetTasksByUserIdQuery, useGetAllTasksQuery, useSaveTaskMutation, useDeleteTaskMutation, useUpdateTaskMutation, useGetTasksByCourseIdQuery } = tasksApi
+export const { useGetTasksByUserIdQuery,
+            useGetAllTasksQuery,
+            useSaveTaskMutation,
+            useDeleteTaskMutation,
+            useUpdateTaskMutation,
+            useGetTasksByCourseIdQuery } = tasksApi
