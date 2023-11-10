@@ -11,7 +11,7 @@ export const UISelect = ({ control, name, label, children, defaultValue = '', mu
 
     return (
         <FormControl fullWidth sx={{ marginTop: '5px' }} >
-            <label>
+            <label style={{ alignItems: "normal", flexDirection: 'column' }}>
                 {label}
                 <Select
                     value={field.value}
@@ -21,7 +21,7 @@ export const UISelect = ({ control, name, label, children, defaultValue = '', mu
                     sx={{
                         color: 'black',
                         marginBottom: '15px',
-                        marginTop: '2px',
+                        marginTop: '4px',
                         '& .MuiOutlinedInput-notchedOutline': { borderColor: "#979797" },
                         '& .MuiInputBase-input': { paddingY: '13.5px' }
                     }}

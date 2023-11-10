@@ -38,4 +38,8 @@ export const materialsApi = createApi({
     }),
 })
 
-export const { useGetAllMaterialsQuery, useSaveMaterialMutation, useDeleteMaterialMutation, useUpdateMaterialMutation, useGetMaterialsByCourseIdQuery } = materialsApi
+export const { useGetAllMaterialsQuery,
+            useSaveMaterialMutation,
+            useDeleteMaterialMutation,
+            useUpdateMaterialMutation,
+            useGetMaterialsByCourseIdQuery } = materialsApi
