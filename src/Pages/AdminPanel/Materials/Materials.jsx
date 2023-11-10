@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Modal } from '@mui/material'
+import { Button, CircularProgress, MenuItem, Modal } from '@mui/material'
 import styles from './Materials.module.scss'
 import { useEffect, useState } from 'react'
 import { useGetAllMaterialsQuery, useSaveMaterialMutation } from '../../../api/materials'
@@ -6,36 +6,41 @@ import { Material } from './Material/Material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMaterials } from '../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
+import { UISelect } from '../../../Components/UISelect/UISelect'
+import { useGetAllCoursesQuery } from '../../../api/courses'
 
 export const Materials = () => {
     const {
         register,
         handleSubmit,
         reset,
-    } = useForm({
-        defaultValues: {
-            role: "USER",
-            primaryOnboarding: false,
-            startTime: ""
-        }
-    })
+        control
+    } = useForm()
 
     const style = {
         ":hover": { backgroundColor: '#f3234d' },
         backgroundColor: '#E55C78',
         borderRadius: 2,
-        paddingY: 1
+        paddingY: 1,
+        alignSelf: 'flex-start'
     }
 
     const [modalActive, setModalActive] = useState(false)
     const [saveMaterialMutation] = useSaveMaterialMutation()
     const { isFetching, data, refetch } = useGetAllMaterialsQuery()
+    const { data: coursesData } = useGetAllCoursesQuery()
     const dispatch = useDispatch()
     const materials = useSelector(state => state.admin.materials)
 
     const onSubmit = async (data) => {
-        await saveMaterialMutation(data).unwrap()
-        console.log(data)
+        const formattedData = {
+            ...data,
+            course: {
+                id: data.course
+            }
+        }
+        await saveMaterialMutation(formattedData).unwrap()
+        console.log(formattedData)
         refetch()
         setModalActive(false)
         reset()
@@ -58,21 +63,22 @@ export const Materials = () => {
                     <div className={styles.materialFormWrapper}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <h3>Добавление материала</h3>
-                            <input
-                                placeholder='Название материала'
-                                {...register("name")} />
-                            <input
-                                placeholder='Описание'
-                                {...register("description")} />
-                            <input
-                                placeholder='К какому курсу прикрепить материал'
-                                {...register("course")} />
-                            <input
-                                placeholder='Ссылка на скачивание материала'
-                                {...register("link")} />
-                            <input
-                                placeholder='Ссылка на тестирование'
-                                {...register("yandexFormsLink")} />
+                            <label>Название материала <input {...register("name")} /></label>
+                            <label>Описание <input {...register("description")} /></label>
+                            <UISelect control={control} label="К какому курсу прикрепить материал" name='course' >
+                                {coursesData ? (
+                                    coursesData.map((course) => (
+                                        <MenuItem
+                                            key={course.id}
+                                            value={course.id}
+                                        >
+                                            {course.name}
+                                        </MenuItem>
+                                    ))
+                                ) : null}
+                            </UISelect>
+                            <label>Ссылка на скачивание <input {...register("link")} /></label>
+                            <label>Ссылка на тестирование <input {...register("yandexFormsLink")} /></label>
                             <Button
                                 variant="contained"
                                 sx={style}
@@ -86,11 +92,11 @@ export const Materials = () => {
                 <h2>Все материалы</h2>
                 {isFetching ? (
                     <CircularProgress />
-                ) : materials ? (
+                ) : materials && coursesData ? (
                     <>
-                    {console.log(data)}
+                        {console.log(data)}
                         {materials.map((material) => (
-                            <Material material={material} key={material.id} />
+                            <Material courses={coursesData} material={material} key={material.id} />
                         ))}
                     </>
                 ) : null}
