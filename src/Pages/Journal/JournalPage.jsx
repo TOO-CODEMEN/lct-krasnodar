@@ -13,6 +13,9 @@ export const JournalPage = () => {
 И у нас есть ориентиры.`} />
 
             <Modal active={modalActive} setActive={setModalActive}>
+                <div onClick={() => setModalActive(false)} style={{color: '#F1367D', cursor: 'pointer'}}>
+                    Закрыть 
+                </div>
                 <div className={styles.journal__modal__title}>
                     Предназначение (Proscom Mission)
                 </div>
