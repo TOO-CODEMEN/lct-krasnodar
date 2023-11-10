@@ -10,7 +10,7 @@ const UsefulMaterials = () => {
 
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => state.user.currentUser.id))
     if (data) {
-        var courseId = data[4].id
+        var courseId = data[2].id
     }
     const { isError: error, isFetching: fetching, data: dataMaterials } = useGetMaterialsByCourseIdQuery(courseId)
 
