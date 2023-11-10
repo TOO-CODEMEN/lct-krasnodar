@@ -18,18 +18,20 @@
 
     &__deadline {
         color: grey;
-        margin-bottom: 20px;
     }
 
     &__materialsTitle {
         font-size: 24px;
+        margin-top: 20px;
     }
 
     &__materialsList {
         display: flex;
         flex-wrap: wrap;
+        width: 100%;
 
         &__item {
+            width: 100%;
             margin-top: 10px;
             &:not(:first-child) {
                 margin-left: 20px;
@@ -54,5 +56,6 @@
 .flex {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    width: 100%
 }
