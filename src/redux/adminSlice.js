@@ -36,6 +36,7 @@ export const adminSlice = createSlice({
         deleteMaterial(state, action) {
             state.materials = state.materials.filter((material) => material.id != action.payload)
         },
+
         setTasks(state, action) {
             state.tasks = action.payload
         },
@@ -47,10 +48,34 @@ export const adminSlice = createSlice({
         },
         deleteTask(state, action) {
             state.tasks = state.tasks.filter((task) => task.id != action.payload)
+        },
+
+        setCourses(state, action) {
+            state.courses = action.payload
+        },
+        updateCourse(state, action) {
+            const index = state.courses.findIndex(course => course.id == action.payload.id)
+            if (index !== -1) {
+                state.courses[index] = action.payload
+            }
+        },
+        deleteCourse(state, action) {
+            state.courses = state.courses.filter((course) => course.id != action.payload)
         }
     },
 })
 
-export const { setUsers, deleteUser, updateUser, setMaterials, deleteMaterial, updateMaterial, setTasks, deleteTask, updateTask } = adminSlice.actions
+export const { setUsers,
+            deleteUser,
+            updateUser,
+            setMaterials,
+            deleteMaterial,
+            updateMaterial,
+            setTasks,
+            deleteTask,
+            updateTask,
+            setCourses,
+            deleteCourse,
+            updateCourse } = adminSlice.actions
 
 export default adminSlice.reducer

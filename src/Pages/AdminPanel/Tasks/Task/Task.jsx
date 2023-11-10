@@ -56,9 +56,9 @@ export const Task = ({ task }) => {
                     </div>
                     <div>Курс: {task.course?.name} </div>
                     <div>Дедлайн: {formatTimestamp(task.deadline, true)}</div>
-                    <div>Статус: {task.status ? <>Пройдено</> : <>Не пройдено</> }</div>
+                    <div>Статус: {task.status ? <>Пройдено</> : <>Не пройдено</>}</div>
                     <div>Дата создания: {formatTimestamp(task.timeOfCreation)}</div>
-                    
+
                 </div>
                 <div className={styles.Actions}>
                     <Button onClick={handleDelete}>Удалить задачу</Button>
@@ -69,11 +69,14 @@ export const Task = ({ task }) => {
             <div className={styles.saveTask}>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
                     <div className={styles.updateFormWrapper}>
-                    <form onSubmit={handleSubmit(onUpdate)}>
+                        <form onSubmit={handleSubmit(onUpdate)}>
                             <h3>Редактирование задачи</h3>
-                            <input
-                                placeholder='Название задачи'
-                                {...register("name")} />
+                            <label>
+                                Название задачи
+                                <input
+                                    placeholder='Название задачи'
+                                    {...register("name")} />
+                            </label>
                             <input
                                 placeholder='Описание'
                                 {...register("description")} />

@@ -1,7 +1,7 @@
 import MaterialsItem from './MaterialsItem/MaterialsItem'
 import styles from './UsefulMaterials.module.scss'
 import material1 from '../../../assets/material1.jpg'
-import { useGetCoursesByUserIdQuery } from '../../../api/lessons'
+import { useGetCoursesByUserIdQuery } from '../../../api/courses'
 import { useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { useGetMaterialsByCourseIdQuery } from '../../../api/materials'

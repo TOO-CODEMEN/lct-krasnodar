@@ -42,6 +42,7 @@ export const Tasks = () => {
 
     useEffect(() => {
         data ? dispatch(setTasks(data)) : null
+        refetch()
     }, [data])
 
     return (

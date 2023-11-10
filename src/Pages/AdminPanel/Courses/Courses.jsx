@@ -1,142 +1,96 @@
-import { Button, CircularProgress, Modal, TextField } from '@mui/material'
-import styles from './Users.module.scss'
+import { Button, CircularProgress, FormControl, InputLabel, MenuItem, Modal, Select } from '@mui/material'
+import styles from './Courses.module.scss'
 import { useEffect, useState } from 'react'
-import { Input } from '../../../Components/Input/Input'
-import { useGetAllUsersQuery, useSaveUserMutation } from '../../../api/users'
-import { User } from './User/User'
+import { useGetAllCoursesQuery, useSaveCourseMutation } from '../../../api/courses'
+import { Course } from './Course/Course'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUsers } from '../../../redux/adminSlice'
+import { setCourses } from '../../../redux/adminSlice'
+import { Controller, useController, useForm } from 'react-hook-form'
+import { UISelect } from '../../../Components/UISelect/UISelect'
 
-export const Users = () => {
-    const initialForm = {
-        name: "",
-        surname: "",
-        patronymic: "",
-        password: "",
-        position: "",
-        email: "",
-        number: "",
-        telegram: "",
-        startTime: "",
-        primaryOnboarding: false,
-        role: 'USER'
+export const Courses = () => {
+    const {
+        register,
+        handleSubmit,
+        reset,
+        control
+    } = useForm()
+
+    const style = {
+        ":hover": { backgroundColor: '#f3234d' },
+        backgroundColor: '#E55C78',
+        borderRadius: 2,
+        paddingY: 1
     }
 
     const [modalActive, setModalActive] = useState(false)
-    const [saveUserMutation] = useSaveUserMutation()
-    const { isFetching, data, refetch } = useGetAllUsersQuery()
-    const [form, setForm] = useState(initialForm)
+    const [saveCourseMutation] = useSaveCourseMutation()
+    const { isError, isFetching, data, refetch } = useGetAllCoursesQuery()
     const dispatch = useDispatch()
-    const users = useSelector(state => state.admin.users)
+    const courses = useSelector(state => state.admin.courses)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await saveUserMutation({ ...form, startTime: Date.now() }).unwrap()
-        refetch()
+    const onSubmit = async (data) => {
+        // await saveCourseMutation(data).unwrap()
+        console.log(data)
+        // refetch()
         setModalActive(false)
-        setForm(initialForm)
+        reset()
     }
 
     useEffect(() => {
-        data ? dispatch(setUsers(data)) : null
+        data ? dispatch(setCourses(data)) : null
+        refetch()
     }, [data])
 
     return (
         <div className='container'>
-            <div className={styles.saveUser}>
+            <div className={styles.saveCourse}>
                 <Button
                     variant="contained"
-                    sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', borderRadius: 2, paddingY: 1, marginBottom: 3 }}
+                    sx={style}
                     onClick={() => setModalActive(true)}
-                >Создать пользователя</Button>
+                >Добавить курс</Button>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
-                    <div className={styles.userFormWrapper}>
-
-                        <form onSubmit={handleSubmit}>
-                            <h3>Создание пользователя</h3>
-                            <Input
-                                required
-                                label="Фамилия"
-                                value={form.surname}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'surname'}
-                            />
-                            <Input
-                                required
-                                label="Имя"
-                                value={form.name}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'name'}
-                            />
-
-                            <Input
-                                required
-                                label="Отчество"
-                                value={form.patronymic}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'patronymic'}
-                            />
-                            <Input
-                                required
-                                label="Электронная почта"
-                                type='email'
-                                value={form.email}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'email'}
-                            />
-                            <Input
-                                required
-                                label="Пароль"
-                                value={form.password}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'password'}
-                            />
-                            <Input
-                                required
-                                label="Должность"
-                                value={form.position}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'position'}
-                            />
-                            <Input
-                                required
-                                label="Номер телефона"
-                                value={form.number}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'number'}
-                            />
-                            <Input
-                                required
-                                label="Аккаунт Telegram"
-                                value={form.telegram}
-                                setValue={setForm}
-                                object={form}
-                                typeObject={'telegram'}
-                            />
+                    <div className={styles.courseFormWrapper}>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <h3>Добавление курса</h3>
+                            <input
+                                placeholder='Название материала'
+                                {...register("name")} />
+                            <input
+                                placeholder='Описание'
+                                {...register("description")} />
+                            <UISelect name='course' control={control} defaultValue='10'>
+                                <MenuItem value={'10'}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </UISelect>
+                            <input
+                                placeholder='Ссылка на скачивание материала'
+                                {...register("link")} />
+                            <input
+                                placeholder='Ссылка на тестирование'
+                                {...register("yandexFormsLink")} />
                             <Button
                                 variant="contained"
-                                sx={{ ":hover": { backgroundColor: '#f3234d' }, backgroundColor: '#E55C78', borderRadius: 2, paddingY: 1, alignSelf: 'flex-start' }}
+                                sx={style}
                                 type='submit'
-                            >Создать</Button>
+                            >Добавить</Button>
                         </form>
                     </div>
                 </Modal>
             </div>
-            <div className={styles.Users}>
-                <h2>Все пользователи</h2>
+            <div className={styles.Courses}>
+                <h2>Все курсы</h2>
                 {isFetching ? (
                     <CircularProgress />
-                ) : users ? (
+                ) : isError ? (
+                    <>Ошибка</>
+                ) : courses ? (
                     <>
-                        {users.map((user) => (
-                            <User user={user} key={user.id} />
+                        {console.log(data)}
+                        {courses.map((course) => (
+                            <Course course={course} key={course.id} />
                         ))}
                     </>
                 ) : null}

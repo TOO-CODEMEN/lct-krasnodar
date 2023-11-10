@@ -1,29 +1,32 @@
-import { Button, Modal } from '@mui/material'
+import { Button, MenuItem, Modal } from '@mui/material'
 import styles from './Material.module.scss'
 import { useDeleteMaterialMutation, useUpdateMaterialMutation } from '../../../../api/materials'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteMaterial, updateMaterial } from '../../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
+import { UISelect } from '../../../../Components/UISelect/UISelect'
 
-export const Material = ({ material }) => {
+export const Material = ({ material, courses }) => {
+
     const {
         register,
         handleSubmit,
+        control
     } = useForm({
         defaultValues: {
-            ...material
+            ...material,
+            course: material.course?.id
         }
     })
-
     const style = {
         ":hover": { backgroundColor: '#f3234d' },
         backgroundColor: '#E55C78',
         borderRadius: 2,
-        paddingY: 1
+        paddingY: 1,
+        alignSelf: 'flex-start'
     }
 
-    const date = new Date(material.startTime)
     const [modalActive, setModalActive] = useState(false)
     const dispatch = useDispatch()
 
@@ -36,8 +39,14 @@ export const Material = ({ material }) => {
     }
 
     const onUpdate = async (data) => {
-        await updateMaterialMutation(data)
-        dispatch(updateMaterial(data))
+        const courseID = data.course
+        const course = courses.find(obj => obj.id == courseID)
+        const formattedData = {...data, course: {
+            id: courseID,
+            name: course.name
+        }}
+        await updateMaterialMutation(formattedData)
+        dispatch(updateMaterial(formattedData))
         setModalActive(false)
     }
 
@@ -65,23 +74,24 @@ export const Material = ({ material }) => {
             <div className={styles.saveMaterial}>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
                     <div className={styles.updateFormWrapper}>
-                    <form onSubmit={handleSubmit(onUpdate)}>
+                        <form onSubmit={handleSubmit(onUpdate)}>
                             <h3>Редактирование материала</h3>
-                            <input
-                                placeholder='Название материала'
-                                {...register("name")} />
-                            <input
-                                placeholder='Описание'
-                                {...register("description")} />
-                            <input
-                                placeholder='К какому курсу прикрепить материал'
-                                {...register("course")} />
-                            <input
-                                placeholder='Ссылка на скачивание материала'
-                                {...register("link")} />
-                                <input
-                                placeholder='Ссылка на тестирование'
-                                {...register("yandexFormsLink")} />
+                            <label>Название материала <input {...register("name")} /></label>
+                            <label>Описание <input {...register("description")} /></label>
+                            <UISelect control={control} label="К какому курсу прикрепить материал" name='course' >
+                                {courses ? (
+                                    courses.map((course) => (
+                                        <MenuItem
+                                            key={course.id}
+                                            value={course.id}
+                                        >
+                                            {course.name}
+                                        </MenuItem>
+                                    ))
+                                ) : null}
+                            </UISelect>
+                            <label>Ссылка на скачивание <input {...register("link")} /></label>
+                            <label>Ссылка на тестирование <input {...register("yandexFormsLink")} /></label>
                             <Button
                                 variant="contained"
                                 sx={style}

@@ -1,18 +1,23 @@
-import { Button, Modal } from '@mui/material'
+import { Button, MenuItem, Modal } from '@mui/material'
 import styles from './User.module.scss'
 import { useDeleteUserMutation, useUpdateUserMutation } from '../../../../api/users'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteUser, updateUser } from '../../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
+import { formatTimestamp } from '../../../../utils/script'
+import { UISelect } from '../../../../Components/UISelect/UISelect'
+import { positions } from '../../../../data/positions'
 
 export const User = ({ user }) => {
     const {
         register,
         handleSubmit,
+        control
     } = useForm({
         defaultValues: {
-            ...user
+            ...user,
+            password: ''
         }
     })
 
@@ -23,7 +28,6 @@ export const User = ({ user }) => {
         paddingY: 1
     }
 
-    const date = new Date(user.startTime)
     const [modalActive, setModalActive] = useState(false)
     const dispatch = useDispatch()
 
@@ -37,11 +41,17 @@ export const User = ({ user }) => {
 
     const onUpdate = async (data) => {
         console.log(data)
-        // await updateUserMutation(form)
+        await updateUserMutation(data)
         dispatch(updateUser(data))
         setModalActive(false)
     }
 
+    const finishHandle = async (data) => {
+        const finishData = {...data, finishTime: Date.now()}
+        const userID = data.id
+        await updateUserMutation({id: userID, finishTime: Date.now()})
+        dispatch(updateUser(finishData))
+    }
 
     return (
         <>
@@ -57,43 +67,38 @@ export const User = ({ user }) => {
                     </div>
                     <div>Задач завершено: {user.completedTasks} </div>
                     <div>Задач провалено: {user.failedTasks}</div>
-                    <div>Дата регистрации: {date.getDate()}.{date.getMonth()}.{date.getFullYear()}</div>
+                    <div>Дата регистрации: {formatTimestamp(user.startTime)}</div>
+                    <div>{user.finishTime ? <>Дата прохождения: {formatTimestamp(user.finishTime)}</> : null} </div>
                 </div>
                 <div className={styles.Actions}>
                     <Button onClick={handleDelete}>Удалить пользователя</Button>
                     <Button onClick={() => setModalActive(true)}>Изменить пользователя</Button>
+                    <Button onClick={() => finishHandle(user)}>Отметить прохождение</Button>
                 </div>
 
             </div>
             <div className={styles.saveUser}>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
                     <div className={styles.updateFormWrapper}>
-                    <form onSubmit={handleSubmit(onUpdate)}>
+                        <form onSubmit={handleSubmit(onUpdate)}>
                             <h3>Редактирование пользователя</h3>
-                            <input
-                                placeholder='Фамилия'
-                                {...register("surname")} />
-                            <input
-                                placeholder='Имя'
-                                {...register("name")} />
-                            <input
-                                placeholder='Отчество'
-                                {...register("patronymic")} />
-                            <input
-                                placeholder='Электронная почта'
-                                {...register("email")} />
-                            <input
-                                placeholder='Пароль'
-                                {...register("password")} />
-                            <input
-                                placeholder='Должность'
-                                {...register("position")} />
-                            <input
-                                placeholder='Номер телефона'
-                                {...register("number")} />
-                            <input
-                                placeholder='Аккаунт Telegram'
-                                {...register("telegram")} />
+                            <label>Фамилия <input {...register("surname")} /></label>
+                            <label>Имя <input {...register("name")} /></label>
+                            <label>Отчество <input {...register("patronymic")} /></label>
+                            <label>Почта <input {...register("email")} /></label>
+                            <label>Пароль <input {...register("password")} /></label>
+                            <UISelect name="position" label="Должность" control={control}>
+                                {positions.map((position) => (
+                                    <MenuItem
+                                        key={position}
+                                        value={position}
+                                    >
+                                        {position}
+                                    </MenuItem>
+                                ))}
+                            </UISelect>
+                            <label>Номер телефона <input {...register("number")} /></label>
+                            <label>Аккаунт Telegram <input {...register("telegram")} /></label>
                             <Button
                                 variant="contained"
                                 sx={style}

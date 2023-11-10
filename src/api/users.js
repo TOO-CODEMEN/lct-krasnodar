@@ -3,35 +3,35 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const usersApi = createApi({
     reducerPath: 'usersApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://89.232.161.161:8080/api/users',
+        baseUrl: 'http://89.232.161.161:8080/api',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }),
     endpoints: (builder) => ({
         getAllUsers: builder.query({
-            query: () => `/getAllUsers`,
+            query: () => `/admin/users/getAllUsers`,
         }),
         getUser: builder.query({
-            query: (email) => `/showUserInfo/${email}`
+            query: (email) => `/users/showUserInfo/${email}`
         }),
         saveUser: builder.mutation({
             query: (body) => ({
-                url: '/saveUser',
+                url: '/admin/users/saveUser',
                 method: 'POST',
                 body
             })
         }),
         updateUser: builder.mutation({
             query: (body) => ({
-                url: `/updateUser/${body.id}`,
+                url: `/admin/users/updateUser/${body.id}`,
                 method: 'PATCH',
                 body
             })
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
-                url: `/deleteUser/${id}`,
+                url: `/admin/users/deleteUser/${id}`,
                 method: 'DELETE'
             })
         })
