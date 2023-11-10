@@ -9,10 +9,8 @@ export const coursesApi = createApi({
         }
     }),
     endpoints: (builder) => ({
-        endpoints: (builder) => ({
-            getCoursesByUserId: builder.query({
-                query: (id) => `/getCoursesByUserId/${id}`,
-            }),
+        getCoursesByUserId: builder.query({
+            query: (id) => `/getCoursesByUserId/${id}`,
         }),
         getAllCourses: builder.query({
             query: () => `/getAllCourses`,
