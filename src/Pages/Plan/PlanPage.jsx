@@ -9,7 +9,7 @@ import { useGetCoursesByUserIdQuery } from '../../api/courses'
 export const PlanPage = () => {
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
     if (data ) {
-        var courseId = data[4].id
+        var courseId = data[2].id
     }
     const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
 

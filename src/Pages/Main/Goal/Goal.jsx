@@ -8,9 +8,10 @@ import { formatTimestamp } from '../../../utils/script'
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser.id)
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(selector)
+    console.log(data)
 
     if (data ) {
-        var courseId = data[4].id
+        var courseId = data[2].id
     }
     const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
 
