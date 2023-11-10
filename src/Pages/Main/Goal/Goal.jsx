@@ -10,14 +10,14 @@ const Goal = () => {
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(selector)
     console.log(data)
 
-    if (data ) {
-        var courseId = data[2].id
+    if (data && data.length > 0) {
+        var courseId = data[0].id
     }
     const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
 
     return (
         <div className={styles.Goal}>
-            {isError ? <div>Ошибка</div> : isFetching ? <CircularProgress /> : dataTasks && dataTasks.length > 0 ?
+            {error ? <div>Ошибка</div> : fetching ? <CircularProgress /> : dataTasks && dataTasks.length > 0 ?
                 <div>
                     <h2>
                         Цель: {dataTasks[0].name}
