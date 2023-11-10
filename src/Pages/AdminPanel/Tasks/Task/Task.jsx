@@ -38,7 +38,7 @@ export const Task = ({ task }) => {
     }
 
     const onUpdate = async (data) => {
-        // await updateTaskMutation(data)
+        await updateTaskMutation(data)
         dispatch(updateTask(data))
         setModalActive(false)
     }
