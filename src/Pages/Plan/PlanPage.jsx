@@ -4,7 +4,7 @@ import { useGetTasksByCourseIdQuery, useGetTasksByUserIdQuery } from '../../api/
 import { useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { PlanCard } from './PlanCard/PlanCard'
-import { useGetCoursesByUserIdQuery } from '../../api/lessons'
+import { useGetCoursesByUserIdQuery } from '../../api/courses'
 
 export const PlanPage = () => {
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))

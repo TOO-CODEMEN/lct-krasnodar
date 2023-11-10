@@ -1,7 +1,7 @@
 import React from 'react'
 import { CircularProgress } from '@mui/material'
 import styles from './Lessons.module.scss'
-import { useGetCoursesByUserIdQuery } from '../../api/lessons'
+import { useGetCoursesByUserIdQuery } from '../../api/courses'
 import { useSelector } from 'react-redux'
 
 

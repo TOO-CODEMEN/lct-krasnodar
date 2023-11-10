@@ -43,6 +43,7 @@ export const Materials = () => {
 
     useEffect(() => {
         data ? dispatch(setMaterials(data)) : null
+        refetch()
     }, [data])
 
     return (
@@ -87,6 +88,7 @@ export const Materials = () => {
                     <CircularProgress />
                 ) : materials ? (
                     <>
+                    {console.log(data)}
                         {materials.map((material) => (
                             <Material material={material} key={material.id} />
                         ))}

@@ -2,7 +2,7 @@ import styles from './Goal.module.scss'
 import { CircularProgress } from "@mui/material"
 import { useSelector } from 'react-redux'
 import { useGetTasksByCourseIdQuery } from '../../../api/tasks'
-import { useGetCoursesByUserIdQuery } from '../../../api/lessons'
+import { useGetCoursesByUserIdQuery } from '../../../api/courses'
 import { formatTimestamp } from '../../../utils/script'
 
 const Goal = () => {

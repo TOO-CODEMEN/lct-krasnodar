@@ -18,16 +18,19 @@ import { setUser } from './redux/userSlice'
 import { useEffect } from 'react'
 import { Cabinet } from './Pages/Cabinet/CabinetPage'
 import { Tasks } from './Pages/AdminPanel/Tasks/Tasks'
+import { Courses } from './Pages/AdminPanel/Courses/Courses'
 
 
 function App() {
     const email = localStorage.getItem('email')
-    const { data } = email ? useGetUserQuery(email) : false
+    const { data, isError } = email ? useGetUserQuery(email) : false
     const dispatch = useDispatch()
     const role = useSelector((state) => state.user.currentUser.role)
 
     if (!isLoggedIn()) {
         return <LoginPage />
+    } else if (isError) {
+        localStorage.clear()
     }
 
     useEffect(() => {
@@ -46,7 +49,7 @@ function App() {
                 <AdminHeader />
                 <Routes>
                     <Route path='/admin' Component={AdminPanel} />
-                    <Route path='/courses' Component={AdminPanel} />
+                    <Route path='/courses' Component={Courses} />
                     <Route path='/tasks' Component={Tasks} />
                     <Route path='/materials' Component={Materials} />
                     <Route path='/users' Component={Users} />
