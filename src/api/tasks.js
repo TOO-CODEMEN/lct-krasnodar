@@ -37,7 +37,7 @@ export const tasksApi = createApi({
             })
         }),
         getTasksByCourseId: builder.query({
-            query: (id) => `/getTasksByCourseId/${id}`,
+            query: (id) => `/tasks/getTasksByCourseId/${id}`,
         }),
     }),
 })
