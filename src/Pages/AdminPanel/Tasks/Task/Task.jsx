@@ -1,4 +1,4 @@
-import { Button, Modal } from '@mui/material'
+import { Button, MenuItem, Modal } from '@mui/material'
 import styles from './Task.module.scss'
 import { useDeleteTaskMutation, useUpdateTaskMutation } from '../../../../api/tasks'
 import { useState } from 'react'
@@ -6,15 +6,21 @@ import { useDispatch } from 'react-redux'
 import { deleteTask, updateTask } from '../../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
 import { formatTimestamp } from '../../../../utils/script'
+import { UISelect } from '../../../../Components/UISelect/UISelect'
 
-export const Task = ({ task }) => {
+export const Task = ({ users, courses, task }) => {
 
     const {
         register,
         handleSubmit,
+        setValue,
+        control
     } = useForm({
         defaultValues: {
-            ...task, deadline: new Date(task.deadline).toISOString().slice(0, 16)
+            ...task,
+            deadline: new Date(task.deadline).toISOString().slice(0, 16),
+            user: task.user?.id,
+            course: task.course?.id,
         }
     })
 
@@ -22,10 +28,16 @@ export const Task = ({ task }) => {
         ":hover": { backgroundColor: '#f3234d' },
         backgroundColor: '#E55C78',
         borderRadius: 2,
-        paddingY: 1
+        paddingY: 1,
+        alignSelf: 'flex-start'
     }
 
-    const date = new Date(task.startTime)
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+    };
+
     const [modalActive, setModalActive] = useState(false)
     const dispatch = useDispatch()
 
@@ -38,6 +50,22 @@ export const Task = ({ task }) => {
     }
 
     const onUpdate = async (data) => {
+        if (data.user) {
+            const user = users.find(obj => obj.id == data.user)
+            data.user = {
+                id: data.user,
+                name: user.name,
+                surname: user.surname,
+                patronymic: user.patronymic,
+            }
+        } else {
+            const course = courses.find(obj => obj.id == data.course)
+            data.course = {
+                id: data.course,
+                name: course.name
+            }
+        }
+        data.deadline = Date.parse(data.deadline)
         await updateTaskMutation(data)
         dispatch(updateTask(data))
         setModalActive(false)
@@ -54,7 +82,7 @@ export const Task = ({ task }) => {
                     <div className={styles.Description}>
                         {task.description}
                     </div>
-                    <div>Курс: {task.course?.name} </div>
+                    <div> {task.course ? <>Курс: {task.course?.name}</> : <>Пользователь: {task.user?.surname} {task.user?.name} {task.user?.patronymic}</>} </div>
                     <div>Дедлайн: {formatTimestamp(task.deadline, true)}</div>
                     <div>Статус: {task.status ? <>Пройдено</> : <>Не пройдено</>}</div>
                     <div>Дата создания: {formatTimestamp(task.timeOfCreation)}</div>
@@ -71,25 +99,31 @@ export const Task = ({ task }) => {
                     <div className={styles.updateFormWrapper}>
                         <form onSubmit={handleSubmit(onUpdate)}>
                             <h3>Редактирование задачи</h3>
-                            <label>
-                                Название задачи
-                                <input
-                                    placeholder='Название задачи'
-                                    {...register("name")} />
-                            </label>
-                            <input
-                                placeholder='Описание'
-                                {...register("description")} />
-                            <input
-                                placeholder='Дедлайн'
-                                type='datetime-local'
-                                {...register("deadline")} />
-                            <input
-                                placeholder='Ссылка на тестирование'
-                                {...register("link")} />
-                            <input
-                                placeholder='К какому курсу прикрепить задачу'
-                                {...register("yandexFormsLink")} />
+                            <label>Название задачи <input {...register("name")} /></label>
+                            <label>Описание <input {...register("description")} /></label>
+                            <label>Дедлайн <input type='datetime-local' {...register("deadline")} /></label>
+                            {users ? (
+                                <>
+                                    <UISelect control={control} label="К какому пользователю прикрепить задачу" name="user">
+                                        {users.map((user) => (
+                                            <MenuItem key={user.id} value={user.id}>
+                                                {user.surname} {user.name} {user.patronymic}
+                                            </MenuItem>
+                                        ))}
+                                    </UISelect>
+                                </>
+                            ) : courses ? (
+                                <>
+                                    <UISelect control={control} label="К какому курсу прикрепить задачу" name="course">
+                                        {courses.map((user) => (
+                                            <MenuItem key={user.id} value={user.id}>
+                                                {user.surname} {user.name} {user.patronymic}
+                                            </MenuItem>
+                                        ))}
+                                    </UISelect>
+                                </>
+                            ) : null}
+
                             <Button
                                 variant="contained"
                                 sx={style}
