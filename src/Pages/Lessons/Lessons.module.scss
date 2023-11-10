@@ -10,8 +10,40 @@
         color: grey;
         text-align: center;
     }
-    
+
+    &__check {
+        display: flex;
+        align-items: center;
+    }
+
+    &__deadline {
+        color: grey;
+        margin-bottom: 20px;
+    }
+
+    &__materialsTitle {
+        font-size: 24px;
+    }
+
+    &__materialsList {
+        display: flex;
+        flex-wrap: wrap;
+
+        &__item {
+            margin-top: 10px;
+            &:not(:first-child) {
+                margin-left: 20px;
+            }
+        }
+    }
+
     @media (max-width: 700px) {
         padding: 15px;
     }
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }

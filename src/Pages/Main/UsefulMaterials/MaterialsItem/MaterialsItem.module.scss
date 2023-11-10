@@ -1,10 +1,11 @@
 .MaterialsItem {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
+    max-width: 300px;
+    border: 1px solid #E55C78;
+    border-radius: 5px;
     height: 100%;
     background-color: #fff;
-    cursor: pointer;
 
     .Content {
         padding: 20px 20px 10px;
@@ -12,7 +13,7 @@
         .Tag {
             font-size: 15px;
             font-weight: 500;
-            margin-bottom: 10px;
+            color: grey;
         }
 
         .Title {
@@ -23,6 +24,20 @@
         }
         .Text {
             line-height: 1.5;
+        }
+
+        .Important {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            font-size: 12px;
+        }
+
+        .Link {
+            display: block;
+            &:last-child{
+                margin-top: 10px;
+            }
         }
     }
 }
