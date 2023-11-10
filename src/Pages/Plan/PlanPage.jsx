@@ -4,12 +4,12 @@ import { useGetTasksByCourseIdQuery, useGetTasksByUserIdQuery } from '../../api/
 import { useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { PlanCard } from './PlanCard/PlanCard'
-import { useGetCoursesByUserIdQuery } from '../../api/lessons'
+import { useGetCoursesByUserIdQuery } from '../../api/courses'
 
 export const PlanPage = () => {
     const { isError, isFetching, data } = useGetCoursesByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
-    if (data ) {
-        var courseId = data[2].id
+    if (data && data.length > 0) {
+        var courseId = data[0].id
     }
     const { isError: error, isFetching: fetching, data: dataTasks } = useGetTasksByCourseIdQuery(courseId) 
 
@@ -18,9 +18,9 @@ export const PlanPage = () => {
             <h1 className={styles.plan__title}>
                 План
             </h1>
-            {isError ?
+            {error ?
                 <div className={styles.plan__note}>Ошибка, попробуйте обновить страницу</div>
-                : isFetching ?
+                : fetching ?
                     <div className={styles.center}> <CircularProgress /></div>
                     :
                     dataTasks && dataTasks.length > 0 ?

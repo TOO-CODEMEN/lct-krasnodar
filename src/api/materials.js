@@ -3,35 +3,35 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const materialsApi = createApi({
     reducerPath: 'materialsApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://89.232.161.161:8080/api/materials',
+        baseUrl: 'http://89.232.161.161:8080/api',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }),
     endpoints: (builder) => ({
         getAllMaterials: builder.query({
-            query: () => `/getAllMaterials`,
+            query: () => `/materials/getAllMaterials`,
         }),
         getMaterialsByCourseId: builder.query({
-            query: (id) => `/getMaterialsByCourseId/${id}`,
+            query: (id) => `/materials/getMaterialsByCourseId/${id}`,
         }),
         saveMaterial: builder.mutation({
             query: (body) => ({
-                url: '/saveMaterial',
+                url: '/admin/materials/saveMaterial',
                 method: 'POST',
                 body
             })
         }),
         updateMaterial: builder.mutation({
             query: (body) => ({
-                url: `/updateMaterial/${body.id}`,
+                url: `/admin/materials/updateMaterial/${body.id}`,
                 method: 'PATCH',
                 body
             })
         }),
         deleteMaterial: builder.mutation({
             query: (id) => ({
-                url: `/deleteMaterialById/${id}`,
+                url: `/admin/materials/deleteMaterialById/${id}`,
                 method: 'DELETE'
             })
         })

@@ -1,0 +1,1 @@
+export const positions = ['Frontend-разработчик', 'Backend-разработчик', 'UI/UX-дизайнер', 'Project-менеджер']

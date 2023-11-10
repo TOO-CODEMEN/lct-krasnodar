@@ -6,7 +6,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { loginApi } from '../api/login'
 import { tasksApi } from '../api/tasks'
 import { materialsApi } from '../api/materials'
-import { lessonApi } from '../api/lessons'
+import { coursesApi } from '../api/courses'
 
 export const store = configureStore({
     reducer: {
@@ -16,9 +16,9 @@ export const store = configureStore({
         [usersApi.reducerPath]: usersApi.reducer,
         [tasksApi.reducerPath]: tasksApi.reducer,
         [materialsApi.reducerPath]: materialsApi.reducer,
-        [lessonApi.reducerPath]: lessonApi.reducer,
+        [coursesApi.reducerPath]: coursesApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(loginApi.middleware, usersApi.middleware, tasksApi.middleware, materialsApi.middleware, lessonApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(loginApi.middleware, usersApi.middleware, tasksApi.middleware, materialsApi.middleware, coursesApi.middleware),
 })
 
 setupListeners(store.dispatch)

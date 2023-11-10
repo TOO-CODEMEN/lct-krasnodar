@@ -1,4 +1,4 @@
-.User {
+.Course {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -14,7 +14,10 @@
     gap: 10px;
 
     a {
-        color: black
+        color: blue;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     .Contacts {
