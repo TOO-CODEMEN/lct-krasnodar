@@ -42,7 +42,7 @@ export const PlanCard = ({ data, refetch, isUpdating = false }) => {
             {
                 isUpdating ?
                     <div className={styles.planCard__done} onClick={() => updateTaskHandler(data.id)}>
-                        <Done sx={{color: 'white'}}/>
+                        <Done className={styles.planCard__done__icon}/>
                     </div> : null
             }
         </div>

@@ -25,5 +25,19 @@
         padding: 2px;
         background-color: #F1367D;
         border-radius: 10px;
+        transition: all .3s ease-in-out;
+        border: 1px solid #F1367D;
+
+        &__icon {
+            transition: all .3s ease-in-out;
+            color: white;
+        }
+
+        &:hover {
+            .planCard__done__icon {
+                color: #F1367D;
+            }
+            background-color: #F5F5F5;
+        }
     }
 }
