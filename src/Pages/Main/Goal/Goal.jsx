@@ -8,8 +8,8 @@ import { useUpdateUserMutation } from '../../../api/users'
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser)
     const { isError, isFetching, data, refetch } = useGetTasksByUserIdQuery(selector.id)
-    const sortData = data ? data.filter((elem) => elem.status === false) : []
     const currentDate = Date.now()
+    const sortData = data ? data.filter((elem) => !elem.status && currentDate <= new Date(elem.deadline)) : []
 
     const [updateTask] = useUpdateTaskMutation()
     const [updateUser] = useUpdateUserMutation()
