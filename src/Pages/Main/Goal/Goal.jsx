@@ -1,32 +1,48 @@
 import styles from './Goal.module.scss'
-import { CircularProgress } from "@mui/material"
+import { Button, CircularProgress } from "@mui/material"
 import { useSelector } from 'react-redux'
-import { useGetTasksByCourseIdQuery, useGetTasksByUserIdQuery } from '../../../api/tasks'
-import { useGetCoursesByUserIdQuery } from '../../../api/courses'
+import { useGetTasksByUserIdQuery, useUpdateTaskMutation } from '../../../api/tasks'
 import { formatTimestamp } from '../../../utils/formatTimestamp'
+import { useUpdateUserMutation } from '../../../api/users'
 
 const Goal = () => {
-    const selector = useSelector((state) => state.user.currentUser.id)
-    const { isError, isFetching, data } = useGetTasksByUserIdQuery(selector) 
-    console.log(data)
+    const selector = useSelector((state) => state.user.currentUser)
+    const { isError, isFetching, data, refetch } = useGetTasksByUserIdQuery(selector.id)
+    const sortData = data ? data.filter((elem) => elem.status === false) : []
+
+    const [updateTask] = useUpdateTaskMutation()
+    const [updateUser] = useUpdateUserMutation()
+
+    const updateTaskHandler = async (idTask ) => {
+        await updateTask({ id: idTask, status: true })
+        await updateUser({ id: selector.id, completedTasks: selector.completedTasks + 1 })
+        refetch()
+    }
 
     return (
         <div className={styles.Goal}>
-            {isError ? <div>Ошибка</div> : isFetching ? <CircularProgress /> : data && data.length > 0 ?
+            {isError ? <div>Ошибка</div> : isFetching ? <CircularProgress /> : sortData && sortData.length > 0 ?
                 <div>
                     <h2>
-                        Цель: {data[0].name}
+                        Цель: {sortData[0].name}
                     </h2>
                     <div className={styles.Goal_description}>
-                        {data[0].description}
+                        {sortData[0].description}
                     </div>
 
                     <div className={styles.Goal__flex}>
                         <div>
-                            {data[0].status ? <span style={{ color: 'green' }}>Сделано</span> : <span style={{ color: 'red' }}>Не сделано</span>}
+                            {sortData[0].status ? <span style={{ color: 'green' }}>Сделано</span> :
+                                <div>
+                                    <span style={{ color: 'red' }}>Не сделано</span>
+                                    <Button
+                                        onClick={() => updateTaskHandler(sortData[0].id)}
+                                    >Отметить выполнение</Button>
+                                </div>
+                            }
                         </div>
                         <div>
-                            Дедлайн: {formatTimestamp(data[0].deadline)}
+                            Дедлайн: {formatTimestamp(sortData[0].deadline)}
                         </div>
                     </div>
                 </div>
