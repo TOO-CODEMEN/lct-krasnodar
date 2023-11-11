@@ -61,7 +61,7 @@ export const Material = ({ material, courses }) => {
                     <div className={styles.Description}>
                         {material.description}
                     </div>
-                    <div>Курс: {material.course?.name} </div>
+                    {material.course ? (<div>Курс: {material.course.name}</div>) : null}
                     <div><a href={material.link}>Ссылка на скачивание</a></div>
                     <div><a href={material.yandexFormsLink}>Ссылка на тест</a></div>
                 </div>

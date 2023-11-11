@@ -5,7 +5,7 @@ import { Close, Done } from '@mui/icons-material'
 import { useGetMaterialsByCourseIdQuery } from '../../../api/materials';
 import styles from '../Lessons.module.scss'
 import MaterialsItem from '../../Main/UsefulMaterials/MaterialsItem/MaterialsItem';
-import { formatTimestamp } from '../../../utils/script';
+import { formatTimestamp } from '../../../utils/formatTimestamp';
 import { useGetTasksByCourseIdQuery } from '../../../api/tasks';
 import { PlanCard } from '../../Plan/PlanCard/PlanCard';
 

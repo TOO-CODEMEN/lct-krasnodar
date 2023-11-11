@@ -1,18 +1,34 @@
-import { Button, Modal } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Button, CircularProgress, MenuItem, Modal } from '@mui/material'
 import styles from './Course.module.scss'
 import { useDeleteCourseMutation, useUpdateCourseMutation } from '../../../../api/courses'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteCourse, updateCourse } from '../../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
+import { formatTimestamp } from '../../../../utils/formatTimestamp'
+import { useGetTasksByCourseIdQuery } from '../../../../api/tasks'
+import { useGetMaterialsByCourseIdQuery } from '../../../../api/materials'
+import { CourseMaterial } from './CourseMaterial/CourseMaterial'
+import { CourseTask } from './CourseTask/CourseTask'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { UISelect } from '../../../../Components/UISelect/UISelect'
 
-export const Course = ({ course }) => {
+
+export const Course = ({ users, course }) => {
+
+    const { isError: tasksError, isFetching: tasksFetching, data: tasksData, refetch: tasksRefetch } = useGetTasksByCourseIdQuery(course.id)
+    const { isError: materialsError, isFetching: materialsFetching, data: materialsData, refetch: materialsRefetch } = useGetMaterialsByCourseIdQuery(course.id)
+
+
     const {
         register,
         handleSubmit,
+        control
     } = useForm({
         defaultValues: {
-            ...course
+            ...course,
+            user: course.user.id,
+            deadline: new Date(course.deadline).toISOString().slice(0, 16),
         }
     })
 
@@ -31,16 +47,28 @@ export const Course = ({ course }) => {
     const [updateCourseMutation] = useUpdateCourseMutation()
 
     const handleDelete = async () => {
-        // await deleteCourseMutation(course.id)
+        await deleteCourseMutation(course.id)
         dispatch(deleteCourse(course.id))
     }
 
     const onUpdate = async (data) => {
-        // await updateCourseMutation(data)
+        data.deadline = Date.parse(data.deadline)
+        const user = users.find(obj => obj.id == data.user)
+        data.user = {
+            id: data.user,
+            name: user.name,
+            surname: user.surname,
+            patronymic: user.patronymic,
+        }
+        await updateCourseMutation(data)
         dispatch(updateCourse(data))
         setModalActive(false)
     }
 
+    useEffect(() => {
+        tasksRefetch()
+        materialsRefetch()
+    }, [])
 
     return (
         <>
@@ -50,38 +78,75 @@ export const Course = ({ course }) => {
                         {course.name}
                     </div>
                     <div className={styles.Description}>
-                        {course.description}
+                        Пользователь: {course.user.surname} {course.user.name} {course.user.patronymic}
+                        <p>{course.user.email}</p>
                     </div>
-                    <div>Курс: {course.course?.name} </div>
-                    <div><a href={course.link}>Ссылка на скачивание</a></div>
-                    <div><a href={course.yandexFormsLink}>Ссылка на тест</a></div>
+                    <div>Дата создания: {formatTimestamp(course.startTime)}</div>
+                    <div>Дедлайн: {formatTimestamp(course.deadline, true)}</div>
+                    {course.finishTime ? (<div>Дата прохождения: {formatTimestamp(course.finishTime, true)}</div>) : null}
                 </div>
+
                 <div className={styles.Actions}>
                     <Button onClick={handleDelete}>Удалить курс</Button>
                     <Button onClick={() => setModalActive(true)}>Изменить курс</Button>
                 </div>
-
-            </div>
+                <div className={styles.Accordions}>
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <h3>Материалы курса ({materialsData && materialsData.length > 0 ? `${materialsData.length}` : '0'})</h3>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            {materialsError ? (
+                                <>Ошибка</>
+                            ) : materialsFetching ? (
+                                <CircularProgress />
+                            ) : materialsData.length > 0 ? (
+                                <>
+                                    {materialsData.map((material) => (
+                                        <CourseMaterial material={material} key={material.id} />
+                                    ))}
+                                </>
+                            ) : (
+                                <p>Материалов нет</p>
+                            )}
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <h3>Задачи курса ({tasksData && tasksData.length > 0 ? `${tasksData.length}` : '0'})</h3>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            {tasksError ? (
+                                <>Ошибка</>
+                            ) : tasksFetching ? (
+                                <CircularProgress />
+                            ) : tasksData.length > 0 ? (
+                                <>
+                                    {tasksData.map((task) => (
+                                        <CourseTask task={task} key={task.id} />
+                                    ))}
+                                </>
+                            ) : (
+                                <p>Задач нет</p>
+                            )}
+                        </AccordionDetails>
+                    </Accordion>
+                </div>
+            </div >
             <div className={styles.saveCourse}>
                 <Modal open={modalActive} onClose={() => setModalActive(false)}>
                     <div className={styles.updateFormWrapper}>
-                    <form onSubmit={handleSubmit(onUpdate)}>
+                        <form onSubmit={handleSubmit(onUpdate)}>
                             <h3>Редактирование курса</h3>
-                            <input
-                                placeholder='Название материала'
-                                {...register("name")} />
-                            <input
-                                placeholder='Описание'
-                                {...register("description")} />
-                            <input
-                                placeholder='К какому курсу прикрепить материал'
-                                {...register("course")} />
-                            <input
-                                placeholder='Ссылка на скачивание материала'
-                                {...register("link")} />
-                                <input
-                                placeholder='Ссылка на тестирование'
-                                {...register("yandexFormsLink")} />
+                            <label>Название курса<input {...register("name")} /></label>
+                            <UISelect name='user' control={control} label='Пользователь'>
+                                {users ? users.map((user) => (
+                                    <MenuItem value={user.id} key={user.id}>
+                                        {user.name}
+                                    </MenuItem>
+                                )) : null}
+                            </UISelect>
+                            <label>Дедлайн <input type='datetime-local' {...register("deadline")} /></label>
                             <Button
                                 variant="contained"
                                 sx={style}
@@ -92,7 +157,5 @@ export const Course = ({ course }) => {
                 </Modal>
             </div>
         </>
-
-
     )
 }

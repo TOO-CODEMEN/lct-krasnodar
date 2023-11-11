@@ -19,59 +19,69 @@ import { useEffect } from 'react'
 import { Cabinet } from './Pages/Cabinet/CabinetPage'
 import { Tasks } from './Pages/AdminPanel/Tasks/Tasks'
 import { Courses } from './Pages/AdminPanel/Courses/Courses'
+import { useGetCuratorQuery } from './api/curator'
 
 
 function App() {
-    const email = localStorage.getItem('email')
-    const { data, isError } = email ? useGetUserQuery(email) : false
     const dispatch = useDispatch()
-    const role = useSelector((state) => state.user.currentUser.role)
-
-    if (!isLoggedIn()) {
-        return <LoginPage />
-    } else if (isError) {
-        localStorage.clear()
-    }
-
+    const email = localStorage.getItem('email')
+    const role = localStorage.getItem('role')
+    const { data: curatorData, isError: curatorError } = useGetCuratorQuery(email)
+    const { data: userData, isError: userError } = useGetUserQuery(email)
     useEffect(() => {
-        if (data) {
-            dispatch(setUser(data))
-            if (role === "USER") {
-                VK.Widgets.CommunityMessages("vk_community_messages", 223332793, { tooltipButtonText: "Есть вопрос?" })
+        if (curatorData || userData) {
+            if (role === "ROLE_USER") {
+                VK.Widgets.CommunityMessages("vk_community_messages", userData.curator.vkGroupId, { tooltipButtonText: "Есть вопрос?" })
+                dispatch(setUser(userData))
             }
+            if (role === "ROLE_ADMIN") {
+                dispatch(setUser(curatorData))
+            }
+        } else if (curatorError || userError) {
+            localStorage.clear()
         }
-    }, [data, role])
+    }, [curatorData, userData, role])
 
 
     return (
         <>
-            {!data ? <></> : role === 'ADMIN' ? <BrowserRouter>
-                <AdminHeader />
-                <Routes>
-                    <Route path='/admin' Component={AdminPanel} />
-                    <Route path='/courses' Component={Courses} />
-                    <Route path='/tasks' Component={Tasks} />
-                    <Route path='/materials' Component={Materials} />
-                    <Route path='/users' Component={Users} />
-                    <Route path='*' element={<Navigate to='/admin' />} />
-                </Routes>
-                <Footer />
-            </BrowserRouter> :
+            {!isLoggedIn() ? (
                 <BrowserRouter>
-                    <Header />
                     <Routes>
-                        <Route path='/main' Component={Main} />
-                        <Route path='/plan' Component={PlanPage} />
-                        <Route path='/journal' Component={JournalPage} />
-                        <Route path='/lessons' Component={LessonsPage} />
-                        <Route path='/answers' Component={AnswersPage} />
-                        <Route path='/lk' Component={Cabinet} />
-                        <Route path='*' element={<Navigate to='/main' />} />
+                        <Route path="/login" element={<LoginPage onLogin={() => location.reload()} />} />
+                        <Route path='*' element={<Navigate to='/login' />} />
                     </Routes>
-                    <div id="vk_community_messages"></div>
+                </BrowserRouter>
+            ) : role === 'ROLE_ADMIN' ? (
+                <BrowserRouter>
+                    <AdminHeader />
+                    <Routes>
+                        <Route path='/admin' Component={AdminPanel} />
+                        <Route path='/courses' Component={Courses} />
+                        <Route path='/tasks' Component={Tasks} />
+                        <Route path='/materials' Component={Materials} />
+                        <Route path='/users' Component={Users} />
+                        <Route path='*' element={<Navigate to='/admin' />} />
+                    </Routes>
                     <Footer />
                 </BrowserRouter>
-            }
+            ) : role === 'ROLE_USER' ?
+                (
+                    <BrowserRouter>
+                        <Header />
+                        <Routes>
+                            <Route path='/main' Component={Main} />
+                            <Route path='/plan' Component={PlanPage} />
+                            <Route path='/journal' Component={JournalPage} />
+                            <Route path='/lessons' Component={LessonsPage} />
+                            <Route path='/answers' Component={AnswersPage} />
+                            <Route path='/lk' Component={Cabinet} />
+                            <Route path='*' element={<Navigate to='/main' />} />
+                        </Routes>
+                        <div id="vk_community_messages"></div>
+                        <Footer />
+                    </BrowserRouter>
+                ) : null}
         </>
     )
 }

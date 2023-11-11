@@ -3,11 +3,10 @@ import { CircularProgress } from "@mui/material"
 import { useSelector } from 'react-redux'
 import { useGetTasksByCourseIdQuery, useGetTasksByUserIdQuery } from '../../../api/tasks'
 import { useGetCoursesByUserIdQuery } from '../../../api/courses'
-import { formatTimestamp } from '../../../utils/script'
+import { formatTimestamp } from '../../../utils/formatTimestamp'
 
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser.id)
-    console.log(selector)
     const { isError, isFetching, data } = useGetTasksByUserIdQuery(selector) 
     console.log(data)
 

@@ -10,6 +10,8 @@ import { UISelect } from '../../../Components/UISelect/UISelect'
 import { positions } from '../../../data/positions'
 
 export const Users = () => {
+    const curatorID = useSelector(state => state.user.currentUser.id)
+    console.log(curatorID)
     const {
         register,
         handleSubmit,
@@ -19,7 +21,7 @@ export const Users = () => {
         defaultValues: {
             role: "USER",
             primaryOnboarding: false,
-            startTime: ""
+            startTime: "",
         }
     })
 
@@ -33,11 +35,14 @@ export const Users = () => {
 
     const [modalActive, setModalActive] = useState(false)
     const [saveUserMutation] = useSaveUserMutation()
-    const { isFetching, data, refetch } = useGetAllUsersQuery()
+    const { isFetching, isError, data, refetch } = useGetAllUsersQuery()
     const dispatch = useDispatch()
     const users = useSelector(state => state.admin.users)
 
     const onSubmit = async (data) => {
+        data.curator = {
+            id: curatorID
+        }
         await saveUserMutation({ ...data, startTime: Date.now() }).unwrap()
         refetch()
         setModalActive(false)
@@ -91,14 +96,15 @@ export const Users = () => {
                 <h2>Все пользователи</h2>
                 {isFetching ? (
                     <CircularProgress />
+                ) : isError ? (
+                    <>Ошибка</>
                 ) : users ? (
                     <>
-                        {console.log(data)}
                         {users.map((user) => (
                             <User user={user} key={user.id} />
                         ))}
                     </>
-                ) : null}
+                ) : <>Пользователей нет</> }
             </div>
         </div>
     )
