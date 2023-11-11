@@ -6,7 +6,7 @@ import { PlanCard } from '../PlanCard/PlanCard'
 
 
 export const PlanPanel = () => {
-    const { isError, isFetching, data } = useGetTasksByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
+    const { isError, isFetching, data, refetch } = useGetTasksByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
     const currentDate = Date.now()
     const sortFalseData = data ? data.filter((elem) => !elem.status && currentDate <= new Date(elem.deadline)) : []
     const sortTrueData = data ? data.filter((elem) => elem.status) : []
@@ -28,7 +28,7 @@ export const PlanPanel = () => {
                                         Выполненные
                                     </div>
                                     {sortTrueData.map((elem, key) =>
-                                        <PlanCard data={elem} key={key} />
+                                        <PlanCard data={elem} key={key} refetch={refetch} />
                                     )}
                                 </div>
                                 <div className={styles.plan__data__flex__info}>
@@ -36,7 +36,7 @@ export const PlanPanel = () => {
                                         Невыполненные
                                     </div>
                                     {sortFalseData.map((elem, key) =>
-                                        <PlanCard data={elem} key={key} />
+                                        <PlanCard data={elem} key={key} refetch={refetch} isUpdating = {true}/>
                                     )}
                                 </div>
                                 <div className={styles.plan__data__flex__info}>
@@ -44,7 +44,7 @@ export const PlanPanel = () => {
                                         Проваленные
                                     </div>
                                     {sortFailData.map((elem, key) =>
-                                        <PlanCard data={elem} key={key} />
+                                        <PlanCard data={elem} key={key} refetch={refetch} />
                                     )}
                                 </div>
                             </div>

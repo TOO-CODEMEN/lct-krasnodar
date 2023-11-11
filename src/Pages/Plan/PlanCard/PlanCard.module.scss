@@ -18,4 +18,12 @@
             margin-bottom: 20px;
         }
     }
+
+    &__done {
+        margin-left: 10px;
+        cursor: pointer;
+        padding: 2px;
+        background-color: #F1367D;
+        border-radius: 10px;
+    }
 }

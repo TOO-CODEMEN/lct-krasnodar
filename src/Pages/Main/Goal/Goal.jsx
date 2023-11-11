@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useGetTasksByUserIdQuery, useUpdateTaskMutation } from '../../../api/tasks'
 import { formatTimestamp } from '../../../utils/formatTimestamp'
 import { useUpdateUserMutation } from '../../../api/users'
+import { PlanCard } from '../../Plan/PlanCard/PlanCard'
 
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser)
