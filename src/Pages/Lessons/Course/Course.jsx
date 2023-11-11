@@ -52,7 +52,7 @@ export const Course = ({ course }) => {
                 <div className={styles.lessons__materialsList}>
                     {errorTasks ? <div>Ошибка</div> : fetchingTasks ? <CircularProgress /> : dataTasks && dataTasks.length > 0 ?
                         dataTasks.map((elem, key) =>
-                            <div className={styles.lessons__materialsList__item}><PlanCard data={elem} key={key} /></div>
+                            <div style={{width: '100%'}}><PlanCard data={elem} key={key} /></div>
                         ) :
                         <div>Материалы отсутствуют</div>
                     }
