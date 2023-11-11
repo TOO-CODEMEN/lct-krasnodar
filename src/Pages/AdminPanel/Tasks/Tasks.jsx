@@ -42,7 +42,7 @@ export const Tasks = () => {
 
     const [modalActive, setModalActive] = useState(false)
     const [saveTaskMutation] = useSaveTaskMutation()
-    const { isFetching, data, refetch } = useGetAllTasksQuery()
+    const { isFetching, isError, data, refetch } = useGetAllTasksQuery()
     const { data: coursesData } = useGetAllCoursesQuery()
     const { data: usersData } = useGetAllUsersQuery()
     const dispatch = useDispatch()
@@ -160,11 +160,13 @@ export const Tasks = () => {
                 <h2>Все задачи</h2>
                 {isFetching ? (
                     <CircularProgress />
+                ) : isError ? (
+                    <>Ошибка</>
                 ) : tasks ? (
                     <>
                         <Accordion>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-                                <h3 className={styles.AccordionTitle}>Задачи пользователей</h3>
+                                <h3 className={styles.AccordionTitle}>Задачи пользователей ({usersTasks.length})</h3>
                             </AccordionSummary>
                             <AccordionDetails>
                                 {usersTasks.map((task) => (
@@ -174,7 +176,7 @@ export const Tasks = () => {
                         </Accordion>
                         <Accordion>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-                                <h3 className={styles.AccordionTitle}>Задачи курсов</h3>
+                                <h3 className={styles.AccordionTitle}>Задачи курсов ({coursesTasks.length})</h3>
                             </AccordionSummary>
                             <AccordionDetails>
                                 {coursesTasks.map((task) => (
@@ -183,7 +185,7 @@ export const Tasks = () => {
                             </AccordionDetails>
                         </Accordion>
                     </>
-                ) : null}
+                ) : <>Задач нет</> }
             </div>
         </div>
     )

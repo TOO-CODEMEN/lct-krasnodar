@@ -19,7 +19,9 @@ export const Courses = () => {
         control
     } = useForm({
         defaultValues: {
-            status: false
+            status: false,
+            materials : [],
+            tasks: []
         }
     })
 
@@ -99,7 +101,7 @@ export const Courses = () => {
                             <Course users={usersData} course={course} key={course.id} />
                         ))}
                     </>
-                ) : null}
+                ) : <>Курсов нет</>}
             </div>
         </div>
     )
