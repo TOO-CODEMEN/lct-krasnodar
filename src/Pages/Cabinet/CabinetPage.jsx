@@ -1,18 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Cabinet.module.scss'
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { logOut } from '../../redux/userSlice';
 import { formatTimestamp } from '../../utils/formatTimestamp';
 
 export const Cabinet = () => {
 
     const data = useSelector((state) => state.user.currentUser)
-    console.log(data)
 
     const dispatch = useDispatch()
 
     return (
-        <div className={styles.cabinet}>
+        <div className={`container ${styles.cabinet}`}>
             <div className={styles.cabinet__up}>
                 <img src='https://fond-vsem-mirom.ru/wp-content/uploads/2022/05/img_2957.jpeg' alt="Фото пользователя" />
                 <div className={styles.cabinet__up__info}>
@@ -40,18 +39,18 @@ export const Cabinet = () => {
                     VK: <a href={`https://vk.com/${data.telegram}`}>{data.telegram}</a>
                 </div>
 
-                <div className={styles.cabinet__middle__info} style={{textAlign: 'center'}}>
-                    Ваш куратор: <div>{data.curator.name}</div> <a href={`mailto:${data.curator.email}`}>{data.curator.email}</a>
+                <div className={styles.cabinet__middle__info} style={{ textAlign: 'center' }}>
+                    Ваш куратор: <div>{data.curator?.name}</div> <a href={`mailto:${data.curator?.email}`}>{data.curator?.email}</a>
                 </div>
             </div>
 
             <div className={styles.cabinet__bottom}>
                 <div className={styles.cabinet__bottom__task}>
-                    Выполнено задач: <div style={{ color: 'green' }}>{data.completedTasks + 2}</div>
+                    Выполнено задач: <div style={{ color: 'green' }}>{data.completedTasks}</div>
                 </div>
 
                 <div className={styles.cabinet__bottom__task}>
-                    Провалено: <div style={{ color: 'red' }}>{data.failedTasks + 1}</div>
+                    Провалено: <div style={{ color: 'red' }}>{data.failedTasks}</div>
                 </div>
             </div>
 
@@ -62,6 +61,7 @@ export const Cabinet = () => {
             >
                 Выйти
             </Button>
+
         </div>
     )
 }

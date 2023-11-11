@@ -12,7 +12,14 @@ export const curatorApi = createApi({
         getCurator: builder.query({
             query: (email) => `/admin/curators/showCuratorInfo/${email}`
         }),
+        updateCurator: builder.mutation({
+            query: (body) => ({
+                url: `/admin/curators/updateCuratorById/${body.id}`,
+                method: 'PATCH',
+                body
+            })
+        }),
     })
 })
 
-export const { useGetCuratorQuery } = curatorApi
+export const { useGetCuratorQuery, useUpdateCuratorMutation } = curatorApi

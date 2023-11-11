@@ -4,6 +4,7 @@
     max-width: 1800px;
     margin: 0 auto;
     padding: 20px;
+    width: 100%;
 }
 
 input {
@@ -14,10 +15,12 @@ input {
     border-radius: 5px;
     border: 1px solid #979797;
     margin-top: 4px;
+
     &:hover {
         border-color: #000;
     }
 }
+
 label {
     font-size: 13px;
     color: #292929;
@@ -25,34 +28,46 @@ label {
     flex-direction: column;
 }
 
+body {
+    height: 100%;
+}
+
 #root {
-	margin: 0 auto;
+    margin: 0 auto;
+    height: 100%;
+    
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
 :root {
-	font-family: Roboto, sans-serif;
-	font-weight: 400;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    height: 100%;
+    
 }
 
 a {
-	font-weight: 500;
-	color: #E55C78;
-	text-decoration: inherit;
+    font-weight: 500;
+    color: #E55C78;
+    text-decoration: inherit;
 }
 
 button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+
     &:hover {
         border-color: #646cff;
     }
+
     &:focus,
     &:focus-visible {
         outline: 4px auto -webkit-focus-ring-color;
