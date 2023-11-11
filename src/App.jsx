@@ -37,8 +37,6 @@ function App() {
             if (role === "ROLE_ADMIN") {
                 dispatch(setUser(curatorData))
             }
-        } else if (curatorError || userError) {
-            localStorage.clear()
         }
     }, [curatorData, userData, role])
 
@@ -78,7 +76,7 @@ function App() {
                             <Route path='/lk' Component={Cabinet} />
                             <Route path='*' element={<Navigate to='/main' />} />
                         </Routes>
-                        <div id="vk_community_messages"></div>
+                        <div id='vk_community_messages'></div>
                         <Footer />
                     </BrowserRouter>
                 ) : null}

@@ -11,7 +11,7 @@ export const Cabinet = () => {
     const dispatch = useDispatch()
 
     return (
-        <div className={styles.cabinet}>
+        <div className={`container ${styles.cabinet}`}>
             <div className={styles.cabinet__up}>
                 <img src='https://fond-vsem-mirom.ru/wp-content/uploads/2022/05/img_2957.jpeg' alt="Фото пользователя" />
                 <div className={styles.cabinet__up__info}>

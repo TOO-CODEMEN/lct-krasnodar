@@ -13,6 +13,9 @@ export const usersSlice = createSlice({
             state.currentUser = action.payload
             state.isAuth = true
         },
+        updateAdmin(state, action) {
+            state.currentUser.vkGroupId = action.payload.vkGroupId
+        },
         logOut(state) {
             localStorage.clear( )
             state.currentUser = {}
@@ -22,6 +25,6 @@ export const usersSlice = createSlice({
     },
 })
 
-export const { setUser, logOut } = usersSlice.actions
+export const { setUser, logOut, updateAdmin } = usersSlice.actions
 
 export default usersSlice.reducer

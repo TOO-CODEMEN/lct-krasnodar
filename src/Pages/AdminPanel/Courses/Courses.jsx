@@ -96,7 +96,6 @@ export const Courses = () => {
                     <>Ошибка</>
                 ) : courses ? (
                     <>
-                        {console.log(data)}
                         {courses.map((course) => (
                             <Course users={usersData} course={course} key={course.id} />
                         ))}
