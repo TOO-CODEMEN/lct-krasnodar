@@ -5,8 +5,7 @@ import { useGetTasksByUserIdQuery } from '../../../api/tasks'
 import { PlanCard } from '../PlanCard/PlanCard'
 
 
-export const PlanPanel = () => {
-    const { isError, isFetching, data, refetch } = useGetTasksByUserIdQuery(useSelector((state) => (state.user.currentUser.id)))
+export const PlanPanel = ({data, refetch, isError, isFetching}) => {
     const currentDate = Date.now()
     const sortFalseData = data ? data.filter((elem) => !elem.status && currentDate <= new Date(elem.deadline)) : []
     const sortTrueData = data ? data.filter((elem) => elem.status) : []

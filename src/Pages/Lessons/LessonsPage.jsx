@@ -13,8 +13,8 @@ export const LessonsPage = () => {
                 {isError ? <div className={styles.lessons__center}>Непредвиденная ошибка</div> : isFetching ? <CircularProgress />
                     : data.length > 0 ?
 
-                        data.map((course, key) =>
-                            <Course course={course} />
+                        data.map((course) =>
+                            <Course course={course} key={course.id}/>
                         )
 
                         : <div className={styles.lessons__center}>На данный момент модулей нет</div>
