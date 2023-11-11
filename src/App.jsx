@@ -29,7 +29,9 @@ function App() {
     const { data: curatorData, isError: curatorError } = useGetCuratorQuery(email)
     const { data: userData, isError: userError } = useGetUserQuery(email)
     useEffect(() => {
-        if (curatorData || userData) {
+        if (curatorError && userError) {
+            localStorage.clear()
+        } else if (curatorData || userData) {
             if (role === "ROLE_USER") {
                 VK.Widgets.CommunityMessages("vk_community_messages", userData.curator.vkGroupId, { tooltipButtonText: "Есть вопрос?" })
                 dispatch(setUser(userData))
