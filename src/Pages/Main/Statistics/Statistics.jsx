@@ -24,12 +24,12 @@ export default function Statistics() {
   console.log(user)
 
   const data02 = [
-    { name: "Выполненные задачи", value: user.completedTasks + 2 },
-    { name: "Невыполненных задач", value: user.failedTasks + 1 },
+    { name: "Выполненные задачи", value: user.completedTasks},
+    { name: "Невыполненных задач", value: user.failedTasks},
   ];
 
-  const countTasks = user.completedTasks + 2 + user.failedTasks + 1
-  const percentCompletedTasks = (user.completedTasks + 2 / countTasks) * 100
+  const countTasks = user.completedTasks + user.failedTasks
+  const percentCompletedTasks = (user.completedTasks / countTasks) * 100
   const COLORS = ['green', '#E55C78'];
 
   return (
@@ -37,7 +37,7 @@ export default function Statistics() {
       <div className={styles.statistics__title}>
         Статистика
       </div>
-      {Object.keys(user).length > 0 ?       <div className={styles.statistics__metrika}>
+      {Object.keys(user).length > 0 ? <div className={styles.statistics__metrika}>
         <div className={styles.statistics__metrika__left}>
           <div className={styles.statistics__metrika__left__text}>Задачи</div>
           <PieChart width={400} height={200}>
