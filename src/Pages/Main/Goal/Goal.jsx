@@ -7,7 +7,6 @@ import { formatTimestamp } from '../../../utils/formatTimestamp'
 
 const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser.id)
-    console.log(selector)
     const { isError, isFetching, data } = useGetTasksByUserIdQuery(selector) 
     console.log(data)
 
