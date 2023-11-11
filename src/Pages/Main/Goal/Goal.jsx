@@ -9,11 +9,12 @@ const Goal = () => {
     const selector = useSelector((state) => state.user.currentUser)
     const { isError, isFetching, data, refetch } = useGetTasksByUserIdQuery(selector.id)
     const sortData = data ? data.filter((elem) => elem.status === false) : []
+    const currentDate = Date.now()
 
     const [updateTask] = useUpdateTaskMutation()
     const [updateUser] = useUpdateUserMutation()
 
-    const updateTaskHandler = async (idTask ) => {
+    const updateTaskHandler = async (idTask) => {
         await updateTask({ id: idTask, status: true })
         await updateUser({ id: selector.id, completedTasks: selector.completedTasks + 1 })
         refetch()
@@ -35,9 +36,9 @@ const Goal = () => {
                             {sortData[0].status ? <span style={{ color: 'green' }}>Сделано</span> :
                                 <div>
                                     <span style={{ color: 'red' }}>Не сделано</span>
-                                    <Button
+                                    {new Date(sortData[0].deadline) <= currentDate ? null : <Button
                                         onClick={() => updateTaskHandler(sortData[0].id)}
-                                    >Отметить выполнение</Button>
+                                    >Отметить выполнение</Button>}
                                 </div>
                             }
                         </div>
