@@ -7,6 +7,7 @@ import { formatTimestamp } from '../../utils/formatTimestamp';
 export const Cabinet = () => {
 
     const data = useSelector((state) => state.user.currentUser)
+    console.log(data)
 
     const dispatch = useDispatch()
 
@@ -21,6 +22,10 @@ export const Cabinet = () => {
                     <div className={styles.cabinet__up__info__email}>
                         {data.email}
                     </div>
+
+                    <div className={styles.cabinet__up__info__role}>
+                        {data.position}
+                    </div>
                 </div>
             </div>
 
@@ -28,11 +33,15 @@ export const Cabinet = () => {
                 <div className={styles.cabinet__middle__date}>
                     Зарегистрирован с <span>{formatTimestamp(data.startTime)}</span>
                 </div>
-                <div className={styles.cabinet__middle__number}>
+                <div className={styles.cabinet__middle__info}>
                     Номер телефона: <a href={`tel:${data.number}`}>{data.number}</a>
                 </div>
-                <div className={styles.cabinet__middle__vk}>
+                <div className={styles.cabinet__middle__info}>
                     VK: <a href={`https://vk.com/${data.telegram}`}>{data.telegram}</a>
+                </div>
+
+                <div className={styles.cabinet__middle__info} style={{textAlign: 'center'}}>
+                    Ваш куратор: <div>{data.curator.name}</div> <a href={`mailto:${data.curator.email}`}>{data.curator.email}</a>
                 </div>
             </div>
 

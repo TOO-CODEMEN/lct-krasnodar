@@ -28,11 +28,10 @@ function App() {
     const role = localStorage.getItem('role')
     const { data: curatorData, isError: curatorError } = useGetCuratorQuery(email)
     const { data: userData, isError: userError } = useGetUserQuery(email)
-
     useEffect(() => {
         if (curatorData || userData) {
             if (role === "ROLE_USER") {
-                VK.Widgets.CommunityMessages("vk_community_messages", 223332793, { tooltipButtonText: "Есть вопрос?" })
+                VK.Widgets.CommunityMessages("vk_community_messages", userData.curator.vkGroupId, { tooltipButtonText: "Есть вопрос?" })
                 dispatch(setUser(userData))
             }
             if (role === "ROLE_ADMIN") {
