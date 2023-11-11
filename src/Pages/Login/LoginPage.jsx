@@ -13,15 +13,19 @@ export const LoginPage = ({ onLogin }) => {
 
     const onSubmitHandler = async (e) => {
         if (!email || !password) {
-            alert("Пожалуйста, введите почту и пароль!");
+            alert("Введите почту и пароль!");
             return;
         } else if (!validator.isEmail(email)) {
             alert('Почта введена неверно')
             return
         }
         e.preventDefault()
-        await login({ email, password }).unwrap()
-        onLogin()
+        try {
+            await login({ email, password }).unwrap()
+            onLogin()
+        } catch{
+            alert('Неверный логин или пароль')
+        }
     }
 
     if (data) {
