@@ -1,0 +1,21 @@
+.Admin {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h2 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+    input {
+        align-self: flex-start;
+    }
+    h3 {
+        font-size: 20px
+    }
+    form {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

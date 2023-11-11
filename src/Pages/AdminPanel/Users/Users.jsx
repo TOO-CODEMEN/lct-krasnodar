@@ -22,6 +22,8 @@ export const Users = () => {
             role: "USER",
             primaryOnboarding: false,
             startTime: "",
+            completedTasks: 0,
+            failedTasks: 0
         }
     })
 
