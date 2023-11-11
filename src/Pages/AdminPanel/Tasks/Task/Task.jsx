@@ -7,6 +7,7 @@ import { deleteTask, updateTask } from '../../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
 import { formatTimestamp } from '../../../../utils/formatTimestamp'
 import { UISelect } from '../../../../Components/UISelect/UISelect'
+import { useUpdateUserMutation } from '../../../../api/users'
 
 export const Task = ({ users, courses, task }) => {
 
@@ -42,11 +43,21 @@ export const Task = ({ users, courses, task }) => {
     const dispatch = useDispatch()
 
     const [deleteTaskMutation] = useDeleteTaskMutation()
+    const [updateUserMutation] = useUpdateUserMutation()
     const [updateTaskMutation] = useUpdateTaskMutation()
 
     const handleDelete = async () => {
         await deleteTaskMutation(task.id)
         dispatch(deleteTask(task.id))
+    }
+
+    const handleCancel = async () => {
+        await updateTaskMutation({id: task.id, status: false})
+        if (task.user) {
+            await updateUserMutation({id: task.user.id, completedTasks: task.user.completedTasks - 1})
+        } else if (task.course) {
+            await updateUserMutation({id: task.course.user.id, completedTasks: task.course.user.completedTasks - 1})
+        }
     }
 
     const onUpdate = async (data) => {
@@ -91,6 +102,7 @@ export const Task = ({ users, courses, task }) => {
                 <div className={styles.Actions}>
                     <Button onClick={handleDelete}>Удалить задачу</Button>
                     <Button onClick={() => setModalActive(true)}>Изменить задачу</Button>
+                    {task.status ? <Button onClick={handleCancel}>Отменить прохождение</Button> : <></>}
                 </div>
 
             </div>
