@@ -21,7 +21,7 @@ export const Tasks = () => {
     } = useForm({
         defaultValues: {
             timeOfCreation: "",
-            status: false
+            status: false,
         }
     })
 
@@ -163,11 +163,7 @@ export const Tasks = () => {
                 ) : tasks ? (
                     <>
                         <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="usersTasks"
-                                id="usersTasksHeader"
-                            >
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                                 <h3 className={styles.AccordionTitle}>Задачи пользователей</h3>
                             </AccordionSummary>
                             <AccordionDetails>
@@ -177,11 +173,7 @@ export const Tasks = () => {
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="coursesTasks"
-                                id="coursesTasksHeader"
-                            >
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                                 <h3 className={styles.AccordionTitle}>Задачи курсов</h3>
                             </AccordionSummary>
                             <AccordionDetails>

@@ -1,5 +1,5 @@
 
-import { formatTimestamp } from '../../../utils/script';
+import { formatTimestamp } from '../../../utils/formatTimestamp';
 import styles from './PlanCard.module.scss'
 
 export const PlanCard = ({ data }) => {

@@ -14,8 +14,7 @@ export const UISelect = ({ control, name, label, children, defaultValue = '', mu
             <label style={{ alignItems: "normal", flexDirection: 'column' }}>
                 {label}
                 <Select
-                    value={field.value}
-                    onChange={field.onChange}
+                    {...field}
                     labelId="select-label"
                     multiple={multiple}
                     sx={{

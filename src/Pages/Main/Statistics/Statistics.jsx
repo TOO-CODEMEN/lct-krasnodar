@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { PieChart, Pie, Legend, Tooltip, Cell, ResponsiveContainer } from "recharts";
 import styles from './Statistics.module.scss'
 import { Box, LinearProgress, Typography } from "@mui/material";
-import { formatTimestamp } from "../../../utils/script";
+import { formatTimestamp } from "../../../utils/formatTimestamp";
 
 function LinearProgressWithLabel(props) {
   return (

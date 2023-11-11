@@ -1,0 +1,17 @@
+.CourseMaterial {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    & > * {
+        max-width: 810px;
+    }
+    padding: 15px;
+    background-color: #f7f2f2;
+    a {
+        color: blue;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

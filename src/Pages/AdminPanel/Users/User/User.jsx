@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteUser, updateUser } from '../../../../redux/adminSlice'
 import { useForm } from 'react-hook-form'
-import { formatTimestamp } from '../../../../utils/script'
+import { formatTimestamp } from '../../../../utils/formatTimestamp'
 import { UISelect } from '../../../../Components/UISelect/UISelect'
 import { positions } from '../../../../data/positions'
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './Cabinet.module.scss'
 import { Button } from '@mui/material';
 import { logOut } from '../../redux/userSlice';
-import { formatTimestamp } from '../../utils/script';
+import { formatTimestamp } from '../../utils/formatTimestamp';
 
 export const Cabinet = () => {
 

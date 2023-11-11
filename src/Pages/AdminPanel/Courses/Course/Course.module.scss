@@ -1,5 +1,6 @@
 .Course {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 10px;
     padding: 15px;
@@ -12,6 +13,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 30px;
 
     a {
         color: blue;
@@ -28,6 +30,12 @@
 .Actions {
     display: flex;
     flex-direction: column;
+}
+.Accordions {
+    width: 100%;
+    h3 {
+        font-weight: 600;
+    }
 }
 .updateFormWrapper {
     position: absolute;

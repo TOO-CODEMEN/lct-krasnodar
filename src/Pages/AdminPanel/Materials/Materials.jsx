@@ -33,14 +33,16 @@ export const Materials = () => {
     const materials = useSelector(state => state.admin.materials)
 
     const onSubmit = async (data) => {
-        const formattedData = {
-            ...data,
-            course: {
+        if (data.course) {
+            data.course = {
                 id: data.course
             }
+        } else {
+            delete data.course
         }
-        await saveMaterialMutation(formattedData).unwrap()
-        console.log(formattedData)
+        
+        await saveMaterialMutation(data).unwrap()
+        console.log(data)
         refetch()
         setModalActive(false)
         reset()
