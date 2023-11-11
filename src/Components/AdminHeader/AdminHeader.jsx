@@ -3,11 +3,12 @@ import styles from './AdminHeader.module.scss'
 import { NavLink } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { logOut } from '../../redux/userSlice'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 export const AdminHeader = () => {
     const currentUser = useSelector(state => state.user.currentUser)
+    const dispatch = useDispatch()
 
     return (
         <div className={styles.Header}>
