@@ -65,6 +65,16 @@ export const Course = ({ users, course }) => {
         setModalActive(false)
     }
 
+    const finishHandle = async (course) => {
+        await updateCourseMutation({id: course.id, status: true, finishTime: Date.now()})
+        const courseDispatch = {
+            ...course,
+            status: true,
+            finishTime: Date.now()
+        }
+        dispatch(updateCourse(courseDispatch))
+    }
+
     useEffect(() => {
         tasksRefetch()
         materialsRefetch()
@@ -89,6 +99,7 @@ export const Course = ({ users, course }) => {
                 <div className={styles.Actions}>
                     <Button onClick={handleDelete}>Удалить курс</Button>
                     <Button onClick={() => setModalActive(true)}>Изменить курс</Button>
+                    {course.status ? <></> : <Button onClick={() => finishHandle(course)}>Отметить прохождение</Button>}
                 </div>
                 <div className={styles.Accordions}>
                     <Accordion>
@@ -142,7 +153,7 @@ export const Course = ({ users, course }) => {
                             <UISelect name='user' control={control} label='Пользователь'>
                                 {users ? users.map((user) => (
                                     <MenuItem value={user.id} key={user.id}>
-                                        {user.name}
+                                        {user.surname} {user.name} {user.patronymic}
                                     </MenuItem>
                                 )) : null}
                             </UISelect>
@@ -152,6 +163,7 @@ export const Course = ({ users, course }) => {
                                 sx={style}
                                 type='submit'
                             >Обновить</Button>
+                            
                         </form>
                     </div>
                 </Modal>

@@ -74,7 +74,7 @@ export const Courses = () => {
                             <UISelect name='user' control={control} label='Пользователь'>
                                 {usersData ? usersData.map((user) => (
                                     <MenuItem value={user.id} key={user.id}>
-                                        {user.name}
+                                        {user.surname} {user.name} {user.patronymic}
                                     </MenuItem>
                                 )) : false}
                             </UISelect>

@@ -73,7 +73,7 @@ export const User = ({ user }) => {
                 <div className={styles.Actions}>
                     <Button onClick={handleDelete}>Удалить пользователя</Button>
                     <Button onClick={() => setModalActive(true)}>Изменить пользователя</Button>
-                    <Button onClick={() => finishHandle(user)}>Отметить прохождение</Button>
+                    {user.finishTime ? <></> : <Button onClick={() => finishHandle(user)}>Отметить прохождение</Button>}
                 </div>
 
             </div>
